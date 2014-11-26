@@ -1,8 +1,17 @@
+
 <ion-view title="Playlists">
   <ion-nav-buttons side="left">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
+      
+<div class="button-bar"></div>
+    <a href="templates/Grafica.html" class="button icon-left ion-edit button-positive button-outline">Gráfica</a>
+<!--      <div id="grafica" style="height: 230px"></div>-->
+<div class="grafico">
+    <iframe  src="templates/grafica.html" frameborder="0"></iframe>
+</div>
+
     <ion-list>
       <ion-item ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
         {{playlist.title}}

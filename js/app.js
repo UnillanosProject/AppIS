@@ -56,7 +56,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-
+    .state('app.Grafica', {
+      url: "/Grafica",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/Grafica.html"
+        }
+      }
+    })
     .state('app.single', {
       url: "/playlists/:playlistId",
       views: {
