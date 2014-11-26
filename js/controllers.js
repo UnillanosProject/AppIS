@@ -44,5 +44,13 @@ angular.module('starter.controllers', [])
   ];
 })
 
+.controller('EmpresasCtrl', function($scope) {
+  $scope.empresas = [
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(0.5%)' },
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'575.5',cambio:'+37.3(0.5%)' },
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'575.5',cambio:'+37.3(0.5%)' },
+  ];
+})
+
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });

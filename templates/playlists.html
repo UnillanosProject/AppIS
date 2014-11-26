@@ -4,21 +4,39 @@
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content class="has-header">
-      <div class="bar bodyGraf gradiente">
-          <div style="border-right-width: 2px">
-              <div style="float: top"><p class="dark">GOOG</p></div>
-              <div style="float: bottom"><b style="color: #000;float: left">575.4</b><p class="balanced" style="float: right">+3.14(0.07%)</p></div>
+      <div class="bar gradiente" ng-controller="EmpresasCtrl">
+      <div style="float: left;width: 200px!important;line-height: 0;border-right-width: 50px;border-right-color: #000">
+          <marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">
+          <div style="float: top;padding-top:5px;margin-bottom: 8px;font-size: 1em">
+              <center>
+                  <h5 class="dark">{{empresa.sigla}}:</h5>
+                  <b>Google Inc.</b>
+              </center>
+          </div>
+              <div style="float: bottom;padding-top: 10px">
+                  <center>
+                  <b class="textoMarquee" style="font-size: 1.1em">{{empresa.cotizacion}}547,5</b>
+                  <b class="balanced textoMarquee" style="font-size: 0.85em">{{empresa.cambio}}+3.14(0.07%)</b>
+                  </center>
+              </div>
+          </marquee>
       </div>
-      <div>
+          <div style="float: right;width: 100%">
           <marquee behavior="scroll" direction="left">
-              <h4 class="dark" style="margin-top: 10px">Sample text</h4>
+              <div ng-repeat="empresa in empresas" style="margin-top: 5px;margin-bottom: 0px;padding-top: 0px;line-height: 0.3;float: left">
+                <p class="dark">{{empresa.sigla}}:</p>
+                <b>{{empresa.titulo}}</b>
+                <b class="textoMarquee" style="font-size: 1.1em">{{empresa.cotizacion}}</b>
+                <b class="balanced textoMarquee" style="font-size: 0.85em">{{empresa.cambio}}</b>
+                &nbsp;
+              </div>
         </marquee>
       </div>
       </div>
 <!--<div class="button-bar"></div>
     <a href="templates/Grafica.html" class="button icon-left ion-edit button-positive button-outline">Gráfica</a>-->
 <!--      <div id="grafica" style="height: 230px"></div>-->
-<div class="grafico">
+<div class="grafico" style="float: bottom">
     <iframe  src="templates/grafica.html" frameborder="0"></iframe>
 </div>
 
