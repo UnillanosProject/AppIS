@@ -5,7 +5,7 @@
    overflow: hidden;
 }
 
-.grafico iframe
+.grafico object
  {
     position: absolute;
     top: 0;
