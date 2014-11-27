@@ -100,9 +100,19 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
     };
 }
 
+angular.module('List.controllers', [])
+.controller('ListsCtrl', function($scope) {
+  $scope.datosLista = empresas;
+  
+  $scope.loadRoster=function(classlist){
+    $scope.selectedClass=classlist;
+    $scope.activeClass=classlist.class_id;
+  };
+});
+
 var empresaTop = {sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)'};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)' },
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'78.4',cambio:'-4.3(0.5%)' },
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'321.4',cambio:'+0.48(0.2%)' }
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)',rango:'51.52 - 54.53' },
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'78.4',cambio:'-4.3(0.5%)' ,rango:'51.52 - 54.53'},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'321.4',cambio:'+0.48(0.2%)' ,rango:'51.52 - 54.53'}
   ];

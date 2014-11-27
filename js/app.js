@@ -76,42 +76,20 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   
 });
 
-angular.module('List', ['ionic'])
+angular.module('List', ['ionic','List.controllers'])
 
-.controller('ListsCtrl', function($scope) {
-  $scope.listas = [
-    { title: 'Apple Inc.', id: 1 },
-    { title: 'Yahoo Inc.', id: 2 },
-    { title: 'Facebook Inc.', id: 3 },
-    { title: 'Ecopetrol', id: 4 },
-    { title: 'Isagen', id: 5 },
-    { title: 'Dólar - Euro', id: 6 }
-  ];
-  
-  $scope.loadRoster=function(classlist){
-    $scope.selectedClass=classlist;
-    $scope.activeClass=classlist.class_id;
-  };
-})
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-  .state('app.list', {
-      url: "/list",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/list.html",
-          controller: 'ListsCtrl'
-        }
-      }
-    })
-    .state('app.single', {
-      url: "/list/:playlistId",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlist.html",
-          controller: 'ListsCtrl'
-        }
-      }
-    });
-});
+//.config(function($stateProvider, $urlRouterProvider) {
+//  $stateProvider
+//  .state('app.list', {
+//      url: "/list",
+//      views: {
+//        'menuContent' :{
+//          templateUrl: "templates/list.html",
+//          controller: 'ListsCtrl'
+//        }
+//      }
+//    });
+//
+;
+
 

@@ -37,11 +37,24 @@
 
   <body ng-controller="ListsCtrl" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
   <ion-content>
-        <ion-list>
-      <ion-item  ng-repeat="lista in listas" href="#/app/list/{{lista.id}}">
-        {{lista.title}}
-      </ion-item>
-   </ion-list> 
+      <div class="list">
+          <div class="item item-divider">
+            Acciones
+        </div>
+          <div ng-repeat="empresa in datosLista" class="item item-avatar item-button-right" style="padding-bottom:5px">
+      <img class="bajarImagen" src="../img/ionic.png">
+      <h2>{{empresa.nombre}} ({{empresa.sigla}})</h2>
+      <p>
+          <b style="font-size: 1.4em">{{empresa.cotizacion}}&nbsp;&nbsp;</b><b style="font-size: 0.9em;color: #66cc33">{{empresa.cambio}}&nbsp;&nbsp;</b><b class="textoLista"> [{{empresa.rango}}]</b> 
+      </p>
+        <button class="button button-dark bajarBoton" style="margin-top:12px">
+        <i class="icon ion-arrow-graph-up-right"></i>
+        </button>
+    </div>
+          <div class="item item-divider">
+            Divisas
+        </div>
+      </div>
 </ion-content>
   <!--<script src="highcharts/highcharts.js"></script>
   <script src="highcharts/modules/exporting.js"></script>
