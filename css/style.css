@@ -16,7 +16,7 @@
 
 .lista {
    position: relative;
-   padding-bottom: 65%;
+   padding-bottom: 85%;//65 para navegador celular
    overflow: hidden;
 }
 
