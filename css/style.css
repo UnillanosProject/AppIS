@@ -1,11 +1,26 @@
 /* Empty. Add your own CSS if you like */
 .grafico {
    position: relative;
-   padding-bottom: 270px;
+   padding-bottom: 275px;
    overflow: hidden;
 }
 
 .grafico object
+ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.lista {
+   position: relative;
+   padding-bottom: 50%;
+   overflow: hidden;
+}
+
+.lista object
  {
     position: absolute;
     top: 0;

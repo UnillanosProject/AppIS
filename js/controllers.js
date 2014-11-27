@@ -31,31 +31,30 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-})
+});
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Apple Inc.', id: 1 },
-    { title: 'Yahoo Inc.', id: 2 },
-    { title: 'Facebook Inc.', id: 3 },
-    { title: 'Ecopetrol', id: 4 },
-    { title: 'Isagen', id: 5 },
-    { title: 'Dólar - Euro', id: 6 }
-  ];
-  
-  $scope.loadRoster=function(classlist){
-    $scope.selectedClass=classlist;
-    $scope.activeClass=classlist.class_id;
-  };
-})
+//.controller('PlaylistsCtrl', function($scope) {
+//  $scope.playlists = [
+//    { title: 'Apple Inc.', id: 1 },
+//    { title: 'Yahoo Inc.', id: 2 },
+//    { title: 'Facebook Inc.', id: 3 },
+//    { title: 'Ecopetrol', id: 4 },
+//    { title: 'Isagen', id: 5 },
+//    { title: 'Dólar - Euro', id: 6 }
+//  ];
+//  
+//  $scope.loadRoster=function(classlist){
+//    $scope.selectedClass=classlist;
+//    $scope.activeClass=classlist.class_id;
+//  };
+//})
 
 //.controller('EmpresasCtrl', function($scope) {
 //  $scope.empresas = empresas;
 //})
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
-
+//.controller('PlaylistCtrl', function($scope, $stateParams) {
+//});
 
 function EmpresasCtrl($scope, /*$http,*/ $interval) {
     $scope.empresas = empresas;
@@ -67,6 +66,7 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
         news_margin: 20,
         news_move_flag: true
     };
+    
     
     $scope.init = function() {
         /*$http.post('the_news_file.json', null).success(function(data) {
@@ -104,5 +104,5 @@ var empresaTop = {sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio
 var empresas = [
     { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)' },
     { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'78.4',cambio:'-4.3(0.5%)' },
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'321.4',cambio:'+0.48(0.2%)' },
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'321.4',cambio:'+0.48(0.2%)' }
   ];

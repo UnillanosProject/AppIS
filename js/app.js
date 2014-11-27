@@ -54,12 +54,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.playlists', {
-      url: "/playlists",
+    .state('app.principal', {
+      url: "/principal",
       views: {
         'menuContent' :{
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
+          templateUrl: "templates/principal.html",
+          controller: 'EmpresasCtrl'
         }
       }
     })
@@ -70,17 +70,48 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           templateUrl: "templates/Grafica.html"
         }
       }
+    });
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/principal');
+  
+});
+
+angular.module('List', ['ionic'])
+
+.controller('ListsCtrl', function($scope) {
+  $scope.listas = [
+    { title: 'Apple Inc.', id: 1 },
+    { title: 'Yahoo Inc.', id: 2 },
+    { title: 'Facebook Inc.', id: 3 },
+    { title: 'Ecopetrol', id: 4 },
+    { title: 'Isagen', id: 5 },
+    { title: 'Dólar - Euro', id: 6 }
+  ];
+  
+  $scope.loadRoster=function(classlist){
+    $scope.selectedClass=classlist;
+    $scope.activeClass=classlist.class_id;
+  };
+})
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
+  .state('app.list', {
+      url: "/list",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/list.html",
+          controller: 'ListsCtrl'
+        }
+      }
     })
     .state('app.single', {
-      url: "/playlists/:playlistId",
+      url: "/list/:playlistId",
       views: {
         'menuContent' :{
           templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
+          controller: 'ListsCtrl'
         }
       }
     });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
 });
 
