@@ -14,6 +14,21 @@
     height: 100%;
 }
 
+.marquesina {
+   position: relative;
+   padding-bottom: 70px;
+   overflow: hidden;
+}
+
+.marquesina object
+ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 .marque {
    position: relative;
    padding-bottom: 20px;
@@ -28,6 +43,31 @@
     width: 100%;
     height: 100%;
 }
+
+.marqueee {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #ccc;
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(209,209,209,1) 50%, rgba(132,132,132,1) 51%, rgba(246,246,246,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(209,209,209,1)), color-stop(51%,rgba(132,132,132,1)), color-stop(100%,rgba(246,246,246,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(209,209,209,1) 50%,rgba(132,132,132,1) 51%,rgba(246,246,246,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(209,209,209,1) 50%,rgba(132,132,132,1) 51%,rgba(246,246,246,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(209,209,209,1) 50%,rgba(132,132,132,1) 51%,rgba(246,246,246,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(209,209,209,1) 50%,rgba(132,132,132,1) 51%,rgba(246,246,246,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f6f6f6',GradientType=0 ); /* IE6-9 */
+}
+
+
+
+
+.separador{
+width:3px;
+height:33px;
+margin-right: 3px;
+background: #000;
+}
+
 
 .noMargen
 {
@@ -51,12 +91,78 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 }
 
-@media (min-width: 5px) and (max-width: 300px){
+/*@media (min-width: 5px) and (max-width: 360px){
 .textoMarquee{
 	width: 100% !important;
 	float: left;
 	line-height: 1;
 }
+}*/
+
+
+#news_strip {
+  width: 100%;
+  border-bottom: 1px dotted #cccccc;
+  display: block;
+  height: 17px;
+  position: relative;
+  overflow: hidden;
 }
+
+#news_strip a {
+  display: inline-block;
+  text-decoration: none;
+  margin-right: 20px;
+  z-index: 1;
+  position: absolute;
+  top: 0px;
+  width: 450px;
+  vertical-align: top;
+}
+
+#news_strip a span {
+  cursor: pointer;
+  display: inline-block;
+  color: #343434;
+  font-weight: bold;
+  padding-right: 5px;
+  z-index: 1;
+}
+
+#news_strip a span.date {
+  display: inline-block;
+  font-weight: normal;
+  color: #888888;
+}
+
+#news_strip a:hover span.title {
+  text-decoration: underline;
+}
+
+/* The shadow DIVs of the sides are decorative and optional, but they add a very nice effect :) */
+
+#news_strip div.shadow{
+  position: absolute;
+  top: 0px;
+  width: 30px;
+  height: 100%;
+  z-index: 5;
+  background: #ffffff;
+}
+
+#news_strip div.shadow.left{
+  left: 0px;
+  -webkit-box-shadow: 10px 0px 10px #fff;
+  -moz-box-shadow: 10px 0px 10px #fff;
+  box-shadow: 10px 0px 10px #fff;
+}
+
+#news_strip div.shadow.right{
+  right: 0px;
+  -webkit-box-shadow: -10px 0px 10px #fff;
+  -moz-box-shadow: -10px 0px 10px #fff;
+  box-shadow: -10px 0px 10px #fff;
+}
+
 
 

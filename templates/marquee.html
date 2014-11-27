@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../css/style.css" rel="stylesheet">
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type='text/javascript' src='../js/marquee.js'></script>
+        <script src="../lib/ionic/js/ionic.bundle.js"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/controllers.js"></script>
+      <script type="text/javascript">
+          $(function () {
+    var $diaplay = $('#display'), counter = 0;
+    $('.marqueee')
+        .bind('beforeStarting', function(){
+            $diaplay.show().html('started').delay(1000).fadeOut('fast');
+        })
+        .bind('finished', function(){
+            counter++;
+            $diaplay.show().html('finished ' + counter + ' times').delay(1000).fadeOut('fast');
+        })
+        //Apply plugin
+    .marquee({
+        duration: 3000
+    })
+});
+      </script>
+    </head>
+    <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0" ng-controller="EmpresasCtrl">
+    <div class="marqueee">
+        <div ng-repeat="empresa in empresas" style="margin-top: 5px;margin-bottom: 10px;padding-top: 0px;line-height: 0.3;float: left">
+                <p class="dark">{{empresa.sigla}}:</p>
+                <b>{{empresa.titulo}}</b>
+                <b style="font-size: 1.1em">{{empresa.cotizacion}}</b>
+                <b ng-class="{'active':positive.class_id == activeClass}" style="font-size: 0.85em">{{empresa.cambio}}</b>
+                &nbsp;
+        </div>
+    </div>
+    </body>
+</html>
