@@ -3,14 +3,18 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Highcharts Example</title>
-                
+                <link href="../lib/ionic/css/ionic.css" rel="stylesheet">
+                <link href="../css/style.css" rel="stylesheet">
                 <script type="text/javascript" src="../js/jquery.min.js"></script>
                 <script type="text/javascript" src="../js/higchart.js"></script>
+                
+                <script id="script"></script>
 	</head>
 
 
         <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
             <div id="grafica" style="height: 230px"></div>
+            <a href="#" onclick="cargarDatosFinance()" class="button button-dark">Cambiar data</a>
             <script src="../highcharts/highcharts.js"></script>
             <script src="../highcharts/modules/exporting.js"></script>
             <script src="../highcharts/themes/dark-unica.js"></script>

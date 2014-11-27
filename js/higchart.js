@@ -1,6 +1,9 @@
+ var options;
+ var chart;
 $(function () {
-    $('#grafica').highcharts({
+    options={
         chart: {
+            renderTo: 'grafica',
             zoomType: 'x'
         },
         title: {
@@ -163,6 +166,47 @@ $(function () {
                 0.714, 0.7119, 0.7129, 0.7129, 0.7049, 0.7095
             ]
         }]
-    });
+    };
+    chart = new Highcharts.Chart(options);
 });
+
+function cambiarData(data) {
+      options.series = [{
+            type: 'area',
+            name: 'Facebook Inc',
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(2006, 0, 1),
+            data: data
+                }];
+      chart = new Highcharts.Chart(options);
+}
+
+
+var yqlCallback = function(datos) {
+        alert(datos.query.count);
+        options.series = [{
+            type: 'area',
+            name: 'Yahoo Inc.',
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(2013, 11, 26),
+            data: []
+                }];
+         for (i = 0; i < datos.query.count; i++) {
+            options.series[0].data.push(datos.query.results.quote[i].Close);
+        }
+        
+        chart = new Highcharts.Chart(options);
+      };
+
+function cargarDatosFinance() {
+    // Build url params and make the ad call
+    var empresa= "YHOO";
+    var fechaInicio="2013-11-26";
+    var fechaFinal="2014-11-26";
+    
+//    var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20%28%22"+empresa+"%22%29&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";  
+    var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+empresa+"%22%20and%20startDate%20%3D%20%22"+fechaInicio+"%22%20and%20endDate%20%3D%20%22"+fechaFinal+"%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";
+    alert(document.getElementById("script").src);
+
+}
 
