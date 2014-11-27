@@ -62,7 +62,7 @@ $(function () {
                 0.8386, 0.8372, 0.839, 0.84, 0.8389, 0.84, 0.8423, 0.8423, 0.8435, 0.8422,
                 0.838, 0.8373, 0.8316, 0.8303,    0.8303, 0.8302,    0.8369, 0.84, 0.8385, 0.84,
                 0.8401, 0.8402, 0.8381, 0.8351,    0.8314, 0.8273,    0.8213, 0.8207,    0.8207, 0.8215,
-                0.8242, 0.8273, 0.8301, 0.8346,    0.8312, 0.8312,    0.8312, 0.8306,    0.8327, 0.8282,
+                0.8242, 0.8273, 0.8301, 0.7,    0.8312, 0.8312,    0.8312, 0.8306,    0.8327, 0.8282,
                 0.824, 0.8255, 0.8256, 0.8273, 0.8209, 0.8151, 0.8149, 0.8213, 0.8273, 0.8273,
                 0.8261, 0.8252, 0.824, 0.8262, 0.8258, 0.8261, 0.826, 0.8199, 0.8153, 0.8097,
                 0.8101, 0.8119, 0.8107, 0.8105,    0.8084, 0.8069,    0.8047, 0.8023,    0.7965, 0.7919,
@@ -183,7 +183,9 @@ function cambiarData(data) {
 
 
 var yqlCallback = function(datos) {
-        alert(datos.query.count);
+        //alert(datos.query.count);
+        options.title.text="Yahoo Inc.";
+        alert(options.series[0].data[4]);
         options.series = [{
             type: 'area',
             name: 'Yahoo Inc.',
@@ -191,10 +193,13 @@ var yqlCallback = function(datos) {
             pointStart: Date.UTC(2013, 11, 26),
             data: []
                 }];
+            options.series[0].data=new Array(datos.query.count);
          for (i = 0; i < datos.query.count; i++) {
-            options.series[0].data.push(datos.query.results.quote[i].Close);
+             options.series[0].data[i]=datos.query.results.quote[i].Close;
+            //options.series[0].data.push(datos.query.results.quote[i].Close);
+            //alert(options.series[0].data[i]);
         }
-        
+        alert(options.series[0].data[datos.query.count-1]);
         chart = new Highcharts.Chart(options);
       };
 
@@ -206,7 +211,7 @@ function cargarDatosFinance() {
     
 //    var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20%28%22"+empresa+"%22%29&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";  
     var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+empresa+"%22%20and%20startDate%20%3D%20%22"+fechaInicio+"%22%20and%20endDate%20%3D%20%22"+fechaFinal+"%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";
-    alert(document.getElementById("script").src);
+    //alert(document.getElementById("script").src);
 
 }
 
