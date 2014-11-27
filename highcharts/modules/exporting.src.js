@@ -10,43 +10,43 @@
 // JSLint options:
 /*global Highcharts, document, window, Math, setTimeout */
 
-(function (Highcharts) { // encapsulate
-
-// create shortcuts
-var Chart = Highcharts.Chart,
-	addEvent = Highcharts.addEvent,
-	removeEvent = Highcharts.removeEvent,
-	createElement = Highcharts.createElement,
-	discardElement = Highcharts.discardElement,
-	css = Highcharts.css,
-	merge = Highcharts.merge,
-	each = Highcharts.each,
-	extend = Highcharts.extend,
-	math = Math,
-	mathMax = math.max,
-	doc = document,
-	win = window,
-	isTouchDevice = Highcharts.isTouchDevice,
-	M = 'M',
-	L = 'L',
-	DIV = 'div',
-	HIDDEN = 'hidden',
-	NONE = 'none',
-	PREFIX = 'highcharts-',
-	ABSOLUTE = 'absolute',
-	PX = 'px',
-	UNDEFINED,
-	symbols = Highcharts.Renderer.prototype.symbols,
-	defaultOptions = Highcharts.getOptions(),
-	buttonOffset;
-
-	// Add language
-	extend(defaultOptions.lang, {
-		printChart: 'Print Image',
-		downloadPNG: 'Download PNG Image',
-		downloadPDF: 'Download PDF Document',
-		contextButtonTitle: 'Chart context menu'
-	});
+//(function (Highcharts) { // encapsulate
+//
+//// create shortcuts
+//var Chart = Highcharts.Chart,
+//	addEvent = Highcharts.addEvent,
+//	removeEvent = Highcharts.removeEvent,
+//	createElement = Highcharts.createElement,
+//	discardElement = Highcharts.discardElement,
+//	css = Highcharts.css,
+//	merge = Highcharts.merge,
+//	each = Highcharts.each,
+//	extend = Highcharts.extend,
+//	math = Math,
+//	mathMax = math.max,
+//	doc = document,
+//	win = window,
+//	isTouchDevice = Highcharts.isTouchDevice,
+//	M = 'M',
+//	L = 'L',
+//	DIV = 'div',
+//	HIDDEN = 'hidden',
+//	NONE = 'none',
+//	PREFIX = 'highcharts-',
+//	ABSOLUTE = 'absolute',
+//	PX = 'px',
+//	UNDEFINED,
+//	symbols = Highcharts.Renderer.prototype.symbols,
+//	defaultOptions = Highcharts.getOptions(),
+//	buttonOffset;
+//
+//	// Add language
+//	extend(defaultOptions.lang, {
+//		printChart: 'Print Image',
+//		downloadPNG: 'Download PNG Image',
+//		downloadPDF: 'Download PDF Document',
+//		contextButtonTitle: 'Chart context menu'
+//	});
 
 // Buttons and menus are collected in a separate config option set called 'navigation'.
 // This can be extended later to add control buttons like zoom and pan right click menus.
