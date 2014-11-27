@@ -42,11 +42,9 @@ var Chart = Highcharts.Chart,
 
 	// Add language
 	extend(defaultOptions.lang, {
-		printChart: 'Print chart',
-		downloadPNG: 'Download PNG image',
-		downloadJPEG: 'Download JPEG image',
-		downloadPDF: 'Download PDF document',
-		downloadSVG: 'Download SVG vector image',
+		printChart: 'Print Image',
+		downloadPNG: 'Download PNG Image',
+		downloadPDF: 'Download PDF Document',
 		contextButtonTitle: 'Chart context menu'
 	});
 
@@ -117,25 +115,11 @@ defaultOptions.exporting = {
 				onclick: function () {
 					this.exportChart();
 				}
-			}, {
-				textKey: 'downloadJPEG',
-				onclick: function () {
-					this.exportChart({
-						type: 'image/jpeg'
-					});
-				}
-			}, {
+			},{
 				textKey: 'downloadPDF',
 				onclick: function () {
 					this.exportChart({
 						type: 'application/pdf'
-					});
-				}
-			}, {
-				textKey: 'downloadSVG',
-				onclick: function () {
-					this.exportChart({
-						type: 'image/svg+xml'
 					});
 				}
 			}
