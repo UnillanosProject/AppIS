@@ -14,3 +14,6 @@ function verificarCambio() {
     }
     
 }
+ function cargando() {
+    
+}
