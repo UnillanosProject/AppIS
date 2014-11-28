@@ -12,7 +12,10 @@ function verificarCambio() {
     if (cambio.textContent.substring(0,1)==="-") {
         cambio.className="assertive";
     }
-    
+}
+
+function cambiarGrafico() {
+    document.getElementById('objectGrafico').contentWindow.cargarDatosFinance();
 }
  function cargando() {
     

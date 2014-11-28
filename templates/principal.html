@@ -6,7 +6,6 @@
     <button id="refresh" class="button button-icon icon ion-refresh" onclic="cargando()"></button>
   </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
-        
       <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
       <div style="float: left;width: 50%!important;line-height: 0">
           <!--<marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">-->
@@ -55,10 +54,10 @@
 <div class="grafico" style="float: bottom">
     <!--<iframe  src="templates/grafica.html" frameborder="0"></iframe>-->
 <!--    <div id="grafico"></div>-->
-    <object data="templates/Grafica.html"></object>
+    <object id="objectGrafico" data="templates/Grafica.html"></object>
 </div>
 <div class="lista" style="float: bottom">
-<object data="templates/list.html"></object>
+<object id="objectList" data="templates/list.html"></object>
 </div>
 <!--      <ion-list>
       <ion-item  ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
