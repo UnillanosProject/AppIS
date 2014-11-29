@@ -7,7 +7,6 @@
 /**
  * Comment
  */
-localStorage.setItem("cargado",false);
 function verificarCambio() {
     var cambio=document.getElementById("cambio");
     if (cambio.textContent.substring(0,1)==="-") {
@@ -31,7 +30,6 @@ function cambiarGrafico(sigla,nombreEmpresa) {
  function cargando() {
     
 }
-
 function TomaVariables(name){
          var regexS = "[\\?&]"+name+"=([^&#]*)";
          var regex = new RegExp (regexS);
