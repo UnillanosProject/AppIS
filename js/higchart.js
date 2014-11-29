@@ -75,20 +75,20 @@ var yqlCallback = function(datos) {
         //alert(datos.query.count);
         options.title.text=empresa;
         //alert(options.series[0].data[4]);
-//        options.series = [{
-//            type: 'area',
-//            name: 'Yahoo Inc.',
-//            pointInterval: 24 * 3600 * 1000,
-//            pointStart: Date.UTC(2013, 11, 26),
-//            data: []
-//                }];
-        options.series.push({
+        options.series = [{
             type: 'area',
             name: empresa,
             pointInterval: 24 * 3600 * 1000,
             pointStart: Date.UTC(2013, 11, 26),
             data: []
-                });
+                }];
+//        options.series.push({
+//            type: 'area',
+//            name: empresa,
+//            pointInterval: 24 * 3600 * 1000,
+//            pointStart: Date.UTC(2013, 11, 26),
+//            data: []
+//                });
             
     //options.series[0].data=new Array(datos.query.count);
      for (i = datos.query.count-1; i >=0; i--) {
