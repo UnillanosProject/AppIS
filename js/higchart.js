@@ -219,6 +219,7 @@ var dataDefault=[
 function cargarDatosFinance(sigla,nombreEmpresa) {
     // Build url params and make the ad call
     empresa = nombreEmpresa.replace("%20"," ");
+//    alert(empresa);
     if(sigla===""){
         options.series[0].data=dataDefault;
         chart = new Highcharts.Chart(options);

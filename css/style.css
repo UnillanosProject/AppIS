@@ -13,6 +13,14 @@
     width: 100%;
     height: 100%;
 }
+.grafico iframe
+ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
 .lista {
    position: relative;
@@ -21,6 +29,14 @@
 }
 
 .lista object
+ {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lista iframe
  {
     position: absolute;
     top: 0;

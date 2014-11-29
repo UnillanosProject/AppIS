@@ -45,7 +45,18 @@ angular.module('starter.controllers', [])
   $scope.hide = function(){
     $ionicLoading.hide();
   };
-});
+})
+.controller('ControllerRefresh', function($scope, $http) {
+  $scope.doRefresh = function() {
+      alert('Fuera de get');
+    $http.get('')
+     .success(function() {
+         alert('Dentro de get');
+     })
+     .finally(function() {
+     });
+  };
+  });
 
 //.controller('PlaylistsCtrl', function($scope) {
 //  $scope.playlists = [

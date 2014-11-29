@@ -16,7 +16,15 @@ function verificarCambio() {
 
 function cambiarGrafico(sigla,nombreEmpresa) {
     //document.getElementById('objectGrafico').contentWindow.cargarDatosFinance();
-    document.getElementById('objectGrafico').data="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
+    var grafico = document.getElementById('objectGrafico');
+//    alert(sigla);
+//    grafico.contentWindow.cargarDatosFinance(sigla,nombreEmpresa);
+//    grafico.data="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
+    grafico.src="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
+    //grafico.src=grafico.src;
+    //var content = grafico.innerHTML;
+   //alert(content);
+    //grafico.innerHTML= content;
     //document.getElementById('objectGrafico').reload();
 }
  function cargando() {

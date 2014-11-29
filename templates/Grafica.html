@@ -10,21 +10,15 @@
                 <script src="../js/Aplicacion.js"></script>
                 <script id="script"></script>
                 
-                <script src="../highcharts/highcharts.js"></script>
-                <!--<script src="../highcharts/adapters/standalone-framework.js"></script>-->
-                <script src="../highcharts/modules/exporting.js"></script>
-                <script src="../highcharts/themes/dark-unica.js"></script>
-                
                 <script>
                     var sigla=TomaVariables('sigla');
                     var empresa=TomaVariables('nombre');
                 </script>
-        
-
+                
+                
 	</head>
-
-
         <body onload="cargarDatosFinance(sigla,empresa);" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+            <!--<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">-->
             <div id="grafica" style="height: 230px"></div>
 <!--            <div class="block">
                 <a href="#" onclick="cargarDatosFinance()" class="button button-dark">Cargar datos de Yahoo Finance</a>
@@ -34,6 +28,10 @@
                 <option>Red</option>
             </select>
             </div>-->
+                <script src="../highcharts/highcharts.js"></script>
+                <!--<script src="../highcharts/adapters/standalone-framework.js"></script>-->
+                <script src="../highcharts/modules/exporting.js"></script>
+                <script src="../highcharts/themes/dark-unica.js"></script>
         </body>
 
 </html>

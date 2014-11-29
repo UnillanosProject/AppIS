@@ -51,13 +51,14 @@
 <!--<div class="button-bar"></div>
     <a href="templates/Grafica.html" class="button icon-left ion-edit button-positive button-outline">Gráfica</a>-->
 <!--      <div id="grafica" style="height: 230px"></div>-->
-<div ng-controller="LoadingCtrl"  ng-init="show()" ng onload="hide()" class="grafico" style="float: bottom">
-    <!--<iframe  src="templates/grafica.html" frameborder="0"></iframe>-->
+<div onload="hide()" class="grafico" style="float: bottom">
+    <iframe  id="objectGrafico" src="templates/Grafica.html"></iframe>
 <!--    <div id="grafico"></div>-->
-    <object  id="objectGrafico" data="templates/Grafica.html"></object>
+    <!--<object  id="objectGrafico" data="templates/Grafica.html"></object>-->
 </div>
 <div class="lista" style="float: bottom">
-<object id="objectList" data="templates/list.html"></object>
+    <iframe  id="objectList" src="templates/list.html"></iframe>
+<!--<object id="objectList" data="templates/list.html"></object>-->
 </div>
 <!--      <ion-list>
       <ion-item  ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
