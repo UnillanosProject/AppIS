@@ -46,11 +46,27 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.about', {
-      url: "/about",
+    .state('app.language', {
+      url: "/language",
       views: {
         'menuContent' :{
-          templateUrl: "templates/about.html"
+          templateUrl: "templates/language.html"
+        }
+      }
+    })
+    .state('app.instruction', {
+      url: "/instruction",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/instruction.html"
+        }
+      }
+    })
+    .state('app.credits', {
+      url: "/credits",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/credits.html"
         }
       }
     })
