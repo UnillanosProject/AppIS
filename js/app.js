@@ -62,11 +62,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-    .state('app.credits', {
-      url: "/credits",
+    .state('app.about', {
+      url: "/about",
       views: {
         'menuContent' :{
-          templateUrl: "templates/credits.html"
+          templateUrl: "templates/about.html"
         }
       }
     })
