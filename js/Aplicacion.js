@@ -27,6 +27,13 @@ function cambiarGrafico(sigla,nombreEmpresa) {
     //grafico.innerHTML= content;
     //document.getElementById('objectGrafico').reload();
 }
+
+function actualizarLista() {
+    alert("Hoijisdji");
+    var lista = document.getElementById('objectList');
+    lista.src=lista.src;
+}
+
  function cargando() {
     
 }
@@ -40,4 +47,25 @@ function TomaVariables(name){
              }else{
                    return results[1];
     }
+}
+
+var yqlcallbackdatos = function (datos) {
+        for (var i = 0; i < datos.query.count; i++) {
+             empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
+             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" "+porcentaje.substring(5,porcentaje.lenght);
+             empresas[i].rango=datos.query.results.quote[i].DaysRange;
+        }
+        //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
+    };
+    
+function tempAlert(msg,duration)
+{
+     var el = document.createElement("div");
+     el.setAttribute("style","position:absolute;top:40%;left:20%;background-color:white;");
+     el.innerHTML = msg;
+     setTimeout(function(){
+      el.parentNode.removeChild(el);
+     },duration);
+     document.body.appendChild(el);
 }

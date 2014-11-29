@@ -23,6 +23,7 @@
     <script src="../js/Aplicacion.js"></script>
     <script src="../js/controllers.js"></script>
     
+    
 <!--    <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript">
     $.noConflict();
@@ -35,14 +36,14 @@
 
   </head>
 
-  <body ng-controller="ListsCtrl" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+  <body ng-controller="ListsCtrl" ng-init="cargarDatosEmpresas();doRefresh();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
   <ion-content>
       <div class="list">
           <div class="item item-divider">
             Acciones
         </div>
           <div ng-repeat="empresa in datosLista" class="item item-avatar item-button-right" style="padding-bottom:5px">
-      <img class="bajarImagen" src="../img/ionic.png">
+      <img class="bajarImagen" src="{{empresa.imagen}}">
       <h2>{{empresa.nombre}} ({{empresa.sigla}})</h2>
       <p>
           <b style="font-size: 1.4em">{{empresa.cotizacion}}&nbsp;&nbsp;</b><b style="font-size: 0.9em;color: #66cc33">{{empresa.cambio}}&nbsp;&nbsp;</b><b class="textoLista"> [{{empresa.rango}}]</b> 
@@ -59,6 +60,7 @@
   <!--<script src="highcharts/highcharts.js"></script>
   <script src="highcharts/modules/exporting.js"></script>
   <script src="highcharts/themes/dark-unica.js"></script>-->
+  <script id="scriptList"></script>
   </body>
   
 </html>

@@ -56,6 +56,11 @@ angular.module('starter.controllers', [])
      .finally(function() {
      });
   };
+  })
+  .controller('BotonCtrl', function($scope) {
+  $scope.cargar = function() {
+      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+  };
   });
 
 //.controller('PlaylistsCtrl', function($scope) {
@@ -127,7 +132,7 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
 
 angular.module('List.controllers', [])
 //.controller('ListsCtrl', function($scope,$ionicLoading) {
- .controller('ListsCtrl', function($scope) {
+ .controller('ListsCtrl', function($scope,$timeout) {
 //    $ionicLoading.show({
 //	    content: 'Loading Data',
 //	    animation: 'fade-in',
@@ -136,7 +141,25 @@ angular.module('List.controllers', [])
 //	    showDelay: 500
 //	});
   $scope.datosLista = empresas;
-  
+  $scope.actualizarLista = function () {
+         $scope.datosLista = empresas;
+         //$scope.$broadcast('scroll.refreshComplete');
+         //alert(datosLista[9].cotizacion);
+         //location.href=document.URL;
+         //window.parent.actualizarLista();
+         //alert('Mostrar gráfica');
+         //tempAlert('Cargando datos del servidor',3000);
+   };
+   $scope.doRefresh = function() {
+    console.log('Refreshing!');
+    $timeout( function() {
+      //simulate async response
+      $scope.datosLista = empresas;
+      //Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
+    
+    }, 1000); 
+  };
   $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
       //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
@@ -147,12 +170,23 @@ angular.module('List.controllers', [])
     $scope.activeClass=classlist.class_id;
   };
   
+  $scope.cargarDatosEmpresas = function () {
+      document.getElementById('scriptList').src="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22GOOG%22%2C%22YHOO%22%2C%22MSFT%22%2C%22ORCL%22%2C%22TWTR%22%2C%22CSCO%22%2C%22ADBE%22%2C%22IBM%22%2C%22FB%22%2C%22AAPL%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlcallbackdatos";
+  };
+  
 //  $ionicLoading.hide();
 });
 
 var empresaTop = {sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)'};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)',rango:'51.52 - 54.53' },
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'78.4',cambio:'-4.3(0.5%)' ,rango:'51.52 - 54.53'},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'321.4',cambio:'+0.48(0.2%)' ,rango:'51.52 - 54.53'}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png'},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg'},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/microsoft.png'},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/oracle.jpg'},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/twitter.jpg'},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/cisco.jpg'},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/adobe.png'},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/ibm.jpg'},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/facebook.png'},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/apple.jpg'}
   ];
