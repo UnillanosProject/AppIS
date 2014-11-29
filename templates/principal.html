@@ -51,8 +51,9 @@
 <!--<div class="button-bar"></div>
     <a href="templates/Grafica.html" class="button icon-left ion-edit button-positive button-outline">Gráfica</a>-->
 <!--      <div id="grafica" style="height: 230px"></div>-->
-<div onload="hide()" class="grafico" style="float: bottom">
-    <iframe  id="objectGrafico" src="templates/Grafica.html"></iframe>
+<div class="grafico" style="float: bottom">
+    <!--<iframe  id="objectGrafico"  src="templates/Grafica.html"></iframe>-->
+    <iframe  id="objectGrafico" ng-controller="LoadingCtrl" ng-init="show();"  src=""></iframe>
 <!--    <div id="grafico"></div>-->
     <!--<object  id="objectGrafico" data="templates/Grafica.html"></object>-->
 </div>

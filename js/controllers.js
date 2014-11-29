@@ -32,19 +32,36 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 })
+
 .controller('LoadingCtrl', function($scope, $ionicLoading) {
   $scope.show = function() {
-//    $ionicLoading.show({
-//        content: 'Loading',
-//        animation: 'fade-in',
-//        showBackdrop: true,
-//        maxWidth: 200,
-//        showDelay: 0
-//    });
+    $ionicLoading.show({
+        //content: 'Loading',
+        templateUrl: 'templates/loading.html',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    }); 
+    var grafico = document.getElementById('objectGrafico');
+    grafico.src="templates/Grafica.html?sigla=&nombre=";
+     $ionicLoading.hide();
   };
   $scope.hide = function(){
-    $ionicLoading.hide();
+//     while(localStorage.cargado){
+//         //sleep(100);
+//         console.log(localStorage.cargado);
+        
+//     }
+//    console.log(localStorage.cargado);
+//    sleep(4000);
+//    console.log(localStorage.cargado);
+//    sleep(10000);
+//    console.log(localStorage.cargado);
   };
+  $scope.cambiarGrafico= function (sigla,nombre) {
+        cambiarGrafico(sigla,nombre);        
+ };
 })
 .controller('ControllerRefresh', function($scope, $http) {
   $scope.doRefresh = function() {
@@ -156,3 +173,12 @@ var empresas = [
     { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'78.4',cambio:'-4.3(0.5%)' ,rango:'51.52 - 54.53'},
     { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'321.4',cambio:'+0.48(0.2%)' ,rango:'51.52 - 54.53'}
   ];
+  
+  function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
