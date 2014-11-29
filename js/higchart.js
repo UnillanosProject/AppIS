@@ -53,7 +53,57 @@ $(function () {
             name: 'USD to EUR',
             pointInterval: 24 * 3600 * 1000,
             pointStart: Date.UTC(2006, 0, 1),
-            data: [
+            data: []
+        }]
+    };
+    //chart = new Highcharts.Chart(options);
+});
+
+function cambiarData(data) {
+      options.series = [{
+            type: 'area',
+            name: 'Facebook Inc',
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(2006, 0, 1),
+            data: data
+                }];
+      chart = new Highcharts.Chart(options);
+}
+
+var empresa;
+var yqlCallback = function(datos) {
+        //alert(datos.query.count);
+        options.title.text=empresa;
+        //alert(options.series[0].data[4]);
+//        options.series = [{
+//            type: 'area',
+//            name: 'Yahoo Inc.',
+//            pointInterval: 24 * 3600 * 1000,
+//            pointStart: Date.UTC(2013, 11, 26),
+//            data: []
+//                }];
+        options.series.push({
+            type: 'area',
+            name: empresa,
+            pointInterval: 24 * 3600 * 1000,
+            pointStart: Date.UTC(2013, 11, 26),
+            data: []
+                });
+            
+    //options.series[0].data=new Array(datos.query.count);
+     for (i = 0; i < datos.query.count; i++) {
+//            if (i<100) {
+//                console.log(i+" : "+datos.query.results.quote[i].Close);
+//            }     
+             //options.series[0].data[i]=datos.query.results.quote[i].Close;
+            options.series[0].data.push(parseFloat(datos.query.results.quote[i].Close));
+            //alert(options.series[0].data[i]);
+        }
+        alert(options.series[0].data[datos.query.count-1]);
+        chart = new Highcharts.Chart(options);
+      };
+
+var dataDefault=[
                 0.8446, 0.8445, 0.8444, 0.8451,    0.8418, 0.8264,    0.8258, 0.8232,    0.8233, 0.8258,
                 0.8283, 0.8278, 0.8256, 0.8292,    0.8239, 0.8239,    0.8245, 0.8265,    0.8261, 0.8269,
                 0.8273, 0.8244, 0.8244, 0.8172,    0.8139, 0.8146,    0.8164, 0.82,    0.8269, 0.8269,
@@ -164,54 +214,26 @@ $(function () {
                 0.7855, 0.7866, 0.7865, 0.7795, 0.7758, 0.7717, 0.761, 0.7497, 0.7471, 0.7473,
                 0.7407, 0.7288, 0.7074, 0.6927, 0.7083, 0.7191, 0.719, 0.7153, 0.7156, 0.7158,
                 0.714, 0.7119, 0.7129, 0.7129, 0.7049, 0.7095
-            ]
-        }]
-    };
-    chart = new Highcharts.Chart(options);
-});
+            ];
 
-function cambiarData(data) {
-      options.series = [{
-            type: 'area',
-            name: 'Facebook Inc',
-            pointInterval: 24 * 3600 * 1000,
-            pointStart: Date.UTC(2006, 0, 1),
-            data: data
-                }];
-      chart = new Highcharts.Chart(options);
-}
-
-
-var yqlCallback = function(datos) {
-        //alert(datos.query.count);
-        options.title.text="Yahoo Inc.";
-        alert(options.series[0].data[4]);
-        options.series = [{
-            type: 'area',
-            name: 'Yahoo Inc.',
-            pointInterval: 24 * 3600 * 1000,
-            pointStart: Date.UTC(2013, 11, 26),
-            data: []
-                }];
-            options.series[0].data=new Array(datos.query.count);
-         for (i = 0; i < datos.query.count; i++) {
-             options.series[0].data[i]=datos.query.results.quote[i].Close;
-            //options.series[0].data.push(datos.query.results.quote[i].Close);
-            //alert(options.series[0].data[i]);
-        }
-        alert(options.series[0].data[datos.query.count-1]);
-        chart = new Highcharts.Chart(options);
-      };
-
-function cargarDatosFinance() {
+function cargarDatosFinance(sigla,nombreEmpresa) {
     // Build url params and make the ad call
-    var empresa= "YHOO";
+    empresa = nombreEmpresa;
+    if(sigla===""){
+        options.series[0].data=dataDefault;
+        chart = new Highcharts.Chart(options);
+    }
+//    else if(empresa==="YHOO"){
+//        options.series[0].data=[58.3,125.4,23.7,26.4,7.85,9.65,2.32];
+//        chart = new Highcharts.Chart(options);
+//    }
+    else{
     var fechaInicio="2013-11-26";
     var fechaFinal="2014-11-26";
     
 //    var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20%28%22"+empresa+"%22%29&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";  
-    var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+empresa+"%22%20and%20startDate%20%3D%20%22"+fechaInicio+"%22%20and%20endDate%20%3D%20%22"+fechaFinal+"%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";
+    var insert = document.getElementById("script").src = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+sigla+"%22%20and%20startDate%20%3D%20%22"+fechaInicio+"%22%20and%20endDate%20%3D%20%22"+fechaFinal+"%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlCallback";
     //alert(document.getElementById("script").src);
-
+    }
 }
 

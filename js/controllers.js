@@ -31,6 +31,20 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+})
+.controller('LoadingCtrl', function($scope, $ionicLoading) {
+  $scope.show = function() {
+//    $ionicLoading.show({
+//        content: 'Loading',
+//        animation: 'fade-in',
+//        showBackdrop: true,
+//        maxWidth: 200,
+//        showDelay: 0
+//    });
+  };
+  $scope.hide = function(){
+    $ionicLoading.hide();
+  };
 });
 
 //.controller('PlaylistsCtrl', function($scope) {
@@ -101,13 +115,28 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
 }
 
 angular.module('List.controllers', [])
-.controller('ListsCtrl', function($scope) {
+//.controller('ListsCtrl', function($scope,$ionicLoading) {
+ .controller('ListsCtrl', function($scope) {
+//    $ionicLoading.show({
+//	    content: 'Loading Data',
+//	    animation: 'fade-in',
+//	    showBackdrop: false,
+//	    maxWidth: 200,
+//	    showDelay: 500
+//	});
   $scope.datosLista = empresas;
+  
+  $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
+      alert(empresa);
+        window.parent.cambiarGrafico(empresa,nombreEmpresa);
+    };
   
   $scope.loadRoster=function(classlist){
     $scope.selectedClass=classlist;
     $scope.activeClass=classlist.class_id;
   };
+  
+//  $ionicLoading.hide();
 });
 
 var empresaTop = {sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)'};

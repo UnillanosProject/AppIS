@@ -3,7 +3,7 @@
   <ion-nav-buttons>
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     <div class="h1 title"></div>
-    <button id="refresh" class="button button-icon icon ion-refresh" onclic="cargando()"></button>
+    <button id="refresh" class="button button-icon icon ion-refresh" onclick="cargando()"></button>
   </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
       <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
@@ -32,7 +32,7 @@
 
      <!--<div style="float: right">-->
         <div id="news_strip" ng-init="init()" ng-mouseover="conf.news_move_flag=false" ng-mouseout="conf.news_move_flag=true" style="float: right;height: 30px">
-            <a style="margin-top: 5px" ng-repeat="(k, empresa) in news track by $index" ng-style="{'right': get_news_right($index)}" id="news_{{$index}}" href="#">
+            <a style="margin-top: 5px" ng-repeat=" empresa in news track by $index" ng-style="{'right': get_news_right($index)}" id="news_{{$index}}" href="#">
                 <b style="color: #000">{{empresa.nombre}}</b>
                 <b class="dark"> ({{empresa.sigla}}):</b>
                 <b style="font-size: 1.1em;color: #000">{{empresa.cotizacion}}</b>
@@ -51,10 +51,10 @@
 <!--<div class="button-bar"></div>
     <a href="templates/Grafica.html" class="button icon-left ion-edit button-positive button-outline">Gráfica</a>-->
 <!--      <div id="grafica" style="height: 230px"></div>-->
-<div class="grafico" style="float: bottom">
+<div ng-controller="LoadingCtrl"  ng-init="show()" ng onload="hide()" class="grafico" style="float: bottom">
     <!--<iframe  src="templates/grafica.html" frameborder="0"></iframe>-->
 <!--    <div id="grafico"></div>-->
-    <object id="objectGrafico" data="templates/Grafica.html"></object>
+    <object  id="objectGrafico" data="templates/Grafica.html"></object>
 </div>
 <div class="lista" style="float: bottom">
 <object id="objectList" data="templates/list.html"></object>

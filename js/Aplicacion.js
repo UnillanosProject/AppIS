@@ -14,9 +14,22 @@ function verificarCambio() {
     }
 }
 
-function cambiarGrafico() {
-    document.getElementById('objectGrafico').contentWindow.cargarDatosFinance();
+function cambiarGrafico(sigla,nombreEmpresa) {
+    //document.getElementById('objectGrafico').contentWindow.cargarDatosFinance();
+    document.getElementById('objectGrafico').data="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
+    //document.getElementById('objectGrafico').reload();
 }
  function cargando() {
     
+}
+function TomaVariables(name){
+         var regexS = "[\\?&]"+name+"=([^&#]*)";
+         var regex = new RegExp (regexS);
+         var tmpURL = window.location.href;
+         var results = regex.exec(tmpURL);
+            if(results==null){
+                  return "";
+             }else{
+                   return results[1];
+    }
 }

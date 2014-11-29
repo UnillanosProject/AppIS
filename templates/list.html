@@ -47,7 +47,7 @@
       <p>
           <b style="font-size: 1.4em">{{empresa.cotizacion}}&nbsp;&nbsp;</b><b style="font-size: 0.9em;color: #66cc33">{{empresa.cambio}}&nbsp;&nbsp;</b><b class="textoLista"> [{{empresa.rango}}]</b> 
       </p>
-        <button onclick="window.parent.cambiarGrafico()" class="button button-dark bajarBoton" style="margin-top:12px">
+        <button ng-click="actualizarGrafico('{{empresa.sigla}}','{{empresa.nombre}}')" class="button button-dark bajarBoton" style="margin-top:12px">
         <i class="icon ion-arrow-graph-up-right"></i>
         </button>
     </div>
