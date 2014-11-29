@@ -99,7 +99,7 @@ var yqlCallback = function(datos) {
             options.series[0].data.push(parseFloat(datos.query.results.quote[i].Close));
             //alert(options.series[0].data[i]);
         }
-        alert(options.series[0].data[datos.query.count-1]);
+        //alert(options.series[0].data[datos.query.count-1]);
         chart = new Highcharts.Chart(options);
       };
 
@@ -218,7 +218,7 @@ var dataDefault=[
 
 function cargarDatosFinance(sigla,nombreEmpresa) {
     // Build url params and make the ad call
-    empresa = nombreEmpresa;
+    empresa = nombreEmpresa.replace("%20"," ");
     if(sigla===""){
         options.series[0].data=dataDefault;
         chart = new Highcharts.Chart(options);

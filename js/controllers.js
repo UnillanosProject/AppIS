@@ -127,7 +127,7 @@ angular.module('List.controllers', [])
   $scope.datosLista = empresas;
   
   $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
-      alert(empresa);
+      //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
     };
   
