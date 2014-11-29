@@ -91,12 +91,12 @@ var yqlCallback = function(datos) {
                 });
             
     //options.series[0].data=new Array(datos.query.count);
-     for (i = 0; i < datos.query.count; i++) {
+     for (i = datos.query.count-1; i >=0; i--) {
 //            if (i<100) {
 //                console.log(i+" : "+datos.query.results.quote[i].Close);
 //            }     
              //options.series[0].data[i]=datos.query.results.quote[i].Close;
-            options.series[0].data.push(parseFloat(datos.query.results.quote[i].Close));
+            options.series[0].data.push(parseFloat(datos.query.results.quote[i].Adj_Close));
             //alert(options.series[0].data[i]);
         }
         //alert(options.series[0].data[datos.query.count-1]);
