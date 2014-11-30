@@ -53,7 +53,7 @@ var yqlcallbackdatos = function (datos) {
         for (var i = 0; i < datos.query.count; i++) {
              empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
-             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(6,porcentaje.lenght)+")";
+             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" "+porcentaje.substring(5,porcentaje.lenght);
              empresas[i].rango=datos.query.results.quote[i].DaysRange;
         }
         //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
