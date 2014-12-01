@@ -58,17 +58,9 @@ angular.module('starter.controllers', [])
   };
   })
   .controller('BotonCtrl', function($scope) {
-    $scope.cargar = function() {
-        document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
-        setTimeout($scope.NoCargar(), 20000);
-    };
-    $scope.NoCargar = function() {
-        document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
-    };
-    $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
-      //alert(empresa);
-        window.parent.cambiarGrafico(empresa,nombreEmpresa);
-    };
+  $scope.cargar = function() {
+      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+  };
   });
 
 //.controller('PlaylistsCtrl', function($scope) {
@@ -165,7 +157,8 @@ angular.module('List.controllers', [])
       $scope.datosLista = empresas;
       //Stop the ion-refresher from spinning
       $scope.$broadcast('scroll.refreshComplete');
-    }, 2000);
+    
+    }, 1000); 
   };
   $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
       //alert(empresa);
