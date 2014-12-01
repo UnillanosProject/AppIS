@@ -75,7 +75,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent' :{
           templateUrl: "templates/principal.html",
-          controller: 'EmpresasCtrl'
+          controller: 'AppCtrl'
         }
       }
     })
@@ -91,21 +91,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   $urlRouterProvider.otherwise('/app/principal');
   
 });
-
-angular.module('List', ['ionic','List.controllers'])
-
-//.config(function($stateProvider, $urlRouterProvider) {
-//  $stateProvider
-//  .state('app.list', {
-//      url: "/list",
-//      views: {
-//        'menuContent' :{
-//          templateUrl: "templates/list.html",
-//          controller: 'ListsCtrl'
-//        }
-//      }
-//    });
-//
-;
 
 
