@@ -5,7 +5,7 @@
     <div class="h1 title"></div>
     <button  id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
-    <ion-content ng-init="guardarPrincipal()" class="has-header" scroll="false">
+    <ion-header-bar class="bar-subheader">
         <button id="botonGrafico" ng-click="show()" ng-hide="true"></button>
         <div class="bar gradiente" style="float: top" scroll="false">
       <div style="float: left;width: 50%!important;line-height: 0;">
@@ -54,15 +54,32 @@
 <!--<div class="button-bar"></div>
     <a href="templates/Grafica.html" class="button icon-left ion-edit button-positive button-outline">Gráfica</a>-->
 <!--      <div id="grafica" style="height: 230px"></div>-->
-<div onload="hide()" class="grafico" style="float: bottom">
+<div class="grafico" style="float: bottom">
     <iframe  id="objectGrafico" src="templates/Grafica.html"></iframe>
 <!--    <div id="grafico"></div>-->
     <!--<object  id="objectGrafico" data="templates/Grafica.html"></object>-->
 </div>
-<div class="lista" style="float: bottom">
-    <iframe  id="objectList" src="templates/list.html"></iframe>
-<!--<object id="objectList" data="templates/list.html"></object>-->
-</div>
+</ion-header-bar>
+<ion-content ng-init="guardarPrincipal()" class="has-header">
+    <br><br><br><br><br><br><br><br><br><br><br>
+<div class="list" ng-init="cargarDatosEmpresas();" style="margin-top: 11px">
+          <div class="item item-divider">
+            Acciones
+        </div>
+          <div ng-repeat="empresa in datosLista" class="item item-avatar item-button-right" style="padding-bottom:5px">
+      <img class="bajarImagen" src="{{empresa.imagen}}">
+      <h2>{{empresa.nombre}} ({{empresa.sigla}})</h2>
+      <p>
+          <b style="font-size: 1.4em">{{empresa.cotizacion}}&nbsp;&nbsp;</b><b ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 0.9em">{{empresa.cambio}}&nbsp;&nbsp;</b><b class="textoLista"> [{{empresa.rango}}]</b> 
+      </p>
+        <button ng-click="show();actualizarGrafico('{{empresa.sigla}}','{{empresa.nombre}}');" class="button button-dark bajarBoton" style="margin-top:12px">
+        <i class="icon ion-arrow-graph-up-right"></i>
+        </button>
+    </div>
+          <div class="item item-divider">
+            Divisas
+        </div>
+      </div>
 <!--      <ion-list>
       <ion-item  ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
         {{playlist.title}}

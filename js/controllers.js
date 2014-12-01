@@ -244,14 +244,14 @@ angular.module('starter.controllers', [])
 
 var empresaTop = { sigla: 'GOOG', nombre: 'Google',cotizacion:'575',cambio:'0.38',rango:'58%',imagen:'../img/google.png',signo:''};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png',signo:''},
-    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg',signo:''},
-    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/microsoft.png',signo:''},
-    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/oracle.jpg',signo:''},
-    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/twitter.jpg',signo:''},
-    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/cisco.jpg',signo:''},
-    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/adobe.png',signo:''},
-    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/ibm.jpg',signo:''},
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/facebook.png',signo:''},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/apple.jpg',signo:''}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'img/google.png',signo:''},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'img/yahoo.jpg',signo:''},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',rango:'',imagen:'img/microsoft.png',signo:''},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',rango:'',imagen:'img/oracle.jpg',signo:''},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',rango:'',imagen:'img/twitter.jpg',signo:''},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',rango:'',imagen:'img/cisco.jpg',signo:''},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',rango:'',imagen:'img/adobe.png',signo:''},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',rango:'',imagen:'img/ibm.jpg',signo:''},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'img/facebook.png',signo:''},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'img/apple.jpg',signo:''}
   ];
