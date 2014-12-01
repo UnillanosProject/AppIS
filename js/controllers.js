@@ -214,7 +214,7 @@ angular.module('List.controllers', [])
 //  $ionicLoading.hide();
 });
 
-var empresaTop = {sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)'};
+var empresaTop = { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575',cambio:'0.38',rango:'58%',imagen:'../img/google.png',signo:''};
 var empresas = [
     { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png',signo:''},
     { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg',signo:''},

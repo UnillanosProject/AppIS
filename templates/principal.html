@@ -6,7 +6,7 @@
     <button ng-controller="BotonCtrl" id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
-      <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
+        <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
       <div style="float: left;width: 50%!important;line-height: 0;">
           <!--<marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">-->
               <center>
@@ -14,7 +14,7 @@
                   <!--<b>Google Inc.</b>-->
                   <p>
                       <b style="font-size: 1.1em;">{{empresaTop.cotizacion}}</b>
-                      <b class="textoOcultar balanced" style="font-size: 0.85em">{{empresaTop.cambio}}</b>
+                      <b class="textoOcultar balanced" style="font-size: 0.85em">{{empresaTop.cambio}}({{empresaTop.rango}})</b>
                   </p>
               </center>
           <!--</marquee>-->

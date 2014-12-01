@@ -50,12 +50,27 @@ function TomaVariables(name){
 }
 
 var yqlcallbackdatos = function (datos) {
+    var mayor=0;
+    var iMayor=0;
         for (var i = 0; i < datos.query.count; i++) {
              empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
              empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(7,porcentaje.lenght)+")";
              empresas[i].rango=datos.query.results.quote[i].DaysRange;
              empresas[i].signo=porcentaje.substring(6,7);
+             if (empresas[i].signo=="+") {
+                 if (parseFloat(porcentaje.substring(7,porcentaje.lenght))>mayor) {
+                     mayor=parseFloat(porcentaje.substring(7,porcentaje.lenght-1));
+                     iMayor==i;
+                }
+            }
+            if (empresas[i].signo=="-") {
+                 if (parseFloat(porcentaje.substring(7,porcentaje.lenght))>mayor) {
+                     mayor=parseFloat(porcentaje.substring(7,porcentaje.lenght-1))*(-1);
+                     iMayor==i;
+                }
+            }
+            empresasTop=empresas[iMayor];
         }
             localStorage.listaCargada="true";
         
