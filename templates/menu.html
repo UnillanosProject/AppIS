@@ -11,10 +11,9 @@
     <header class="bar bar-header bar-dark">
       <h1 class="title">Menu</h1>
     </header>
-    <ion-content class="has-header">
+    <ion-content class="has-header" ng-init="cargarIdioma('en');">
       <ion-list>
-        <ion-item nav-clear menu-close ng-click="login()">
-          Login
+        <ion-item nav-clear menu-close ng-bind="textos.login" ng-click="login()">
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/prediction">
           Prediction
@@ -22,7 +21,7 @@
         <ion-item nav-clear menu-close href="#/app/viability">
           Viability
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/language">
+        <ion-item nav-clear menu-close ng-click="cargarIdioma('es');">
           Language
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/instruction">

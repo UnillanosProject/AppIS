@@ -2,7 +2,21 @@ angular.module('starter.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading) {
   // Form data for the login modal
-  $scope.loginData = {};
+    //$scope.lenguaje="es";
+    $scope.textos={};
+    $scope.cargarIdioma = function (lenguaje) {
+      //alert('Iniciado cargar idioma');
+      var url="Lenguajes/"+lenguaje+".json";
+      $http.get(url)
+        .success(function (data) {
+            //alert(data.login);
+            //$scope.textos.login=data.login;
+            $scope.textos=data;
+            //alert("Text :"+$scope.textos.login);
+        });
+   };
+    
+    $scope.loginData = {};
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
@@ -176,15 +190,15 @@ angular.module('starter.controllers', [])
 //	    showDelay: 500
 //	});
   $scope.datosLista = empresas;
-  $scope.actualizarLista = function () {
-         $scope.datosLista = empresas;
-         //$scope.$broadcast('scroll.refreshComplete');
-         //alert(datosLista[9].cotizacion);
-         //location.href=document.URL;
-         //window.parent.actualizarLista();
-         //alert('Mostrar gráfica');
-         //tempAlert('Cargando datos del servidor',3000);
-   };
+//  $scope.actualizarLista = function () {
+//         $scope.datosLista = empresas;
+//         //$scope.$broadcast('scroll.refreshComplete');
+//         //alert(datosLista[9].cotizacion);
+//         //location.href=document.URL;
+//         //window.parent.actualizarLista();
+//         //alert('Mostrar gráfica');
+//         //tempAlert('Cargando datos del servidor',3000);
+//   };
   
   $scope.yqlcallbackdatos = function (datos) {
     var mayor=0;
@@ -209,6 +223,7 @@ angular.module('starter.controllers', [])
             }
             //alert(iMayor+" : "+mayor);
         }
+        //alert("Dentro de YQL");
             $scope.empresaTop=empresas[iMayor];
             //alert($scope.empresaTop.nombre);
             localStorage.listaCargada="true";      
