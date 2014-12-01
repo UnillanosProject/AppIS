@@ -22,7 +22,18 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     $scope.modal.show();
   };
-
+  $scope.lenguaje='en';
+  $scope.textos = {login:'Login'};
+  $scope.cargarIdioma = function (lenguaje) {
+      //alert('Iniciado cargar idioma');
+      var url="Lenguajes/"+lenguaje+".json";
+      $http.get(url)
+        .success(function (data) {
+            alert(data.login);
+            $scope.textos.login=data.login;
+            alert("Text "+textos.login);
+        });
+   };
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
     console.log('Doing login', $scope.loginData);
