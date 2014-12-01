@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -10,7 +10,9 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
   });
-
+  $scope.guardarPrincipal = function () {
+          localStorage.setItem('principal',$scope);  
+      };
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
     $scope.modal.hide();
@@ -31,16 +33,41 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+  $scope.mostrarCargando = function () {
+         localStorage.principal.show(); 
+              //window.parent.show();
+     };
 //})
 //.controller('LoadingCtrl', function($scope, $ionicLoading) {
   $scope.show = function() {
-//    $ionicLoading.show({
-//        content: 'Loading',
-//        animation: 'fade-in',
-//        showBackdrop: true,
-//        maxWidth: 200,
-//        showDelay: 0
-//    });
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+    $interval(function () {
+          if (localStorage.graficoCargado=="true") {
+               $scope.hide();
+               localStorage.graficoCargado="false";
+          }   
+     },50,70);
+  };
+  $scope.show2 = function() {
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+    $interval(function () {
+          if (localStorage.listaCargada=="true") {
+               $scope.hide();
+               localStorage.listaCargada="false";
+          }   
+     },50,70);
   };
   $scope.hide = function(){
     $ionicLoading.hide();
@@ -60,6 +87,14 @@ angular.module('starter.controllers', [])
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
       document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+      $scope.cargarDatosEmpresas();
+      $interval(function () {
+          if (localStorage.listaCargada=="true") {
+               document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
+               localStorage.listaCargada="false";
+               $scope.init();
+          }   
+     },50,70);
   };
 //  });
 
@@ -176,8 +211,7 @@ angular.module('starter.controllers', [])
         }
             $scope.empresaTop=empresas[iMayor];
             //alert($scope.empresaTop.nombre);
-            localStorage.listaCargada="true";
-        
+            localStorage.listaCargada="true";      
         //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
     };
     

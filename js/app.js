@@ -92,20 +92,4 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   
 });
 
-angular.module('List', ['ionic','List.controllers'])
-
-//.config(function($stateProvider, $urlRouterProvider) {
-//  $stateProvider
-//  .state('app.list', {
-//      url: "/list",
-//      views: {
-//        'menuContent' :{
-//          templateUrl: "templates/list.html",
-//          controller: 'ListsCtrl'
-//        }
-//      }
-//    });
-//
-;
-
 

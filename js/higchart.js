@@ -101,6 +101,7 @@ var yqlCallback = function(datos) {
         }
         //alert(options.series[0].data[datos.query.count-1]);
         chart = new Highcharts.Chart(options);
+        localStorage.graficoCargado="true";
       };
 
 var dataDefault=[
@@ -223,6 +224,7 @@ function cargarDatosFinance(sigla,nombreEmpresa) {
     if(sigla===""){
         options.series[0].data=dataDefault;
         chart = new Highcharts.Chart(options);
+        localStorage.graficoCargado="true";
     }
 //    else if(empresa==="YHOO"){
 //        options.series[0].data=[58.3,125.4,23.7,26.4,7.85,9.65,2.32];

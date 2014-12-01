@@ -8,6 +8,7 @@
  * Comment
  */
 localStorage.setItem("listaCargada","false");
+localStorage.setItem("graficoCargado","false");
 function verificarCambio() {
     var cambio=document.getElementById("cambio");
     if (cambio.textContent.substring(0,1)==="-") {
@@ -29,14 +30,8 @@ function cambiarGrafico(sigla,nombreEmpresa) {
     //document.getElementById('objectGrafico').reload();
 }
 
-function actualizarLista() {
-    var lista = document.getElementById('objectList');
-    lista.src=lista.src;
-}
 
- function cargando() {
-    
-}
+
 function TomaVariables(name){
          var regexS = "[\\?&]"+name+"=([^&#]*)";
          var regex = new RegExp (regexS);
@@ -48,36 +43,6 @@ function TomaVariables(name){
                    return results[1];
     }
 }
-
-var yqlcallbackdatos = function (datos) {
-    var mayor=0;
-    var iMayor=0;
-        for (var i = 0; i < datos.query.count; i++) {
-             empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
-             var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
-             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(7,porcentaje.lenght)+")";
-             empresas[i].rango=datos.query.results.quote[i].DaysRange;
-             empresas[i].signo=porcentaje.substring(6,7);
-             if (empresas[i].signo=="+") {
-                 if (parseFloat(porcentaje.substring(7,11))>mayor) {
-                     mayor=parseFloat(porcentaje.substring(7,11));
-                     iMayor=i;
-                }
-            }
-            if (empresas[i].signo=="-") {
-                 if (parseFloat(porcentaje.substring(7,11))*(-1)>mayor) {
-                     mayor=parseFloat(porcentaje.substring(7,11))*(-1);
-                     iMayor=i;
-                }
-            }
-            //alert(iMayor+" : "+mayor);
-        }
-            empresaTop=empresas[iMayor];
-            //alert(empresaTop.nombre);
-            localStorage.listaCargada="true";
-        
-        //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
-    };
     
 function tempAlert(msg,duration)
 {
