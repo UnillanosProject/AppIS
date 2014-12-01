@@ -1,9 +1,12 @@
 
 <ion-view title="PredFinance">   
   <ion-nav-buttons>
+      <script src="../js/app.js"></script>
+    <script src="../js/Aplicacion.js"></script>
+    <script src="../js/controllers.js"></script>
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     <div class="h1 title"></div>
-    <button ng-controller="BotonCtrl" id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
+    <button ng-controller="BotonCtrl" id="botonCargar" ng-click="cargar();actualizarGrafico('','');" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
       <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
