@@ -2,6 +2,7 @@
 .grafico {
    position: relative;
    padding-bottom: 230px;
+   height: 230px;
    overflow: hidden;
 }
 

@@ -5,8 +5,9 @@
     <div class="h1 title"></div>
     <button  id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
-    <ion-header-bar class="bar-subheader">
-        <button id="botonGrafico" ng-click="show()" ng-hide="true"></button>
+<!--    <ion-header-bar class="bar-subheader" style="height: 270px">-->
+        <ion-content class="has-header" ng-init="cargarDatosEmpresas();">
+        <!--<button id="botonGrafico" ng-click="show()" ng-hide="true"></button>-->
         <div class="bar gradiente" style="float: top" scroll="false">
       <div style="float: left;width: 50%!important;line-height: 0;">
           <!--<marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">-->
@@ -56,13 +57,20 @@
 <!--      <div id="grafica" style="height: 230px"></div>-->
 <div class="grafico" style="float: bottom">
     <iframe  id="objectGrafico" src="templates/Grafica.html"></iframe>
-<!--    <div id="grafico"></div>-->
-    <!--<object  id="objectGrafico" data="templates/Grafica.html"></object>-->
 </div>
-</ion-header-bar>
-<ion-content class="has-header" ng-init="cargarDatosEmpresas();">
-    <br><br><br><br><br><br><br><br><br><br><br>
-<div class="list"  style="margin-top: 11px">
+<div class="lista" style="float: bottom">
+    <iframe  id="objectLista" src="templates/list.html"></iframe>
+</div>
+    <!--</ion-header-bar>-->
+    
+<!--    <div id="grafico"></div>
+    <object  id="objectGrafico" data="templates/Grafica.html"></object>
+</div>-->
+<!--<br><br><br><br><br><br><br><br><br><br><br>-->
+
+
+    <!--<br><br><br><br><br><br><br><br><br><br><br>-->
+<!--<div class="list"  style="margin-top: 11px">
           <div class="item item-divider">
             Acciones
         </div>
@@ -79,7 +87,7 @@
           <div class="item item-divider">
             Divisas
         </div>
-      </div>
+      </div>-->
 <!--      <ion-list>
       <ion-item  ng-repeat="playlist in playlists" href="#/app/playlists/{{playlist.id}}">
         {{playlist.title}}
