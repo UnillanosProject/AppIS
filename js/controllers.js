@@ -102,7 +102,7 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
         /*$http.post('the_news_file.json', null).success(function(data) {
             if (data && data.length > 0) {*/
                 $scope.news = empresas;
-                $interval($scope.news_move ,2);
+                $interval($scope.news_move ,0);
         /*  }
         });*/
     };
@@ -132,7 +132,7 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
 
 angular.module('List.controllers', [])
 //.controller('ListsCtrl', function($scope,$ionicLoading) {
- .controller('ListsCtrl', function($scope,$timeout) {
+ .controller('ListsCtrl', function($scope,$timeout,$interval) {
 //    $ionicLoading.show({
 //	    content: 'Loading Data',
 //	    animation: 'fade-in',
@@ -150,16 +150,47 @@ angular.module('List.controllers', [])
          //alert('Mostrar gráfica');
          //tempAlert('Cargando datos del servidor',3000);
    };
+   var intervalo;
    $scope.doRefresh = function() {
     console.log('Refreshing!');
-    $timeout( function() {
+       //for (i = 0; i < 70; i++) {
+       //if ( angular.isDefined(intervalo) ) return;
+        intervalo = $interval( function() {
       //simulate async response
-      $scope.datosLista = empresas;
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.refreshComplete');
-    
-    }, 1000); 
+           console.log("En el intervalo, local Storage="+localStorage.listaCargada);
+//            if (localStorage.listaCargada===true) {
+//                listaCargada=true;
+//                //localStorage.listaCargada=false;
+//            }
+//           if (localStorage.listaCargada==true) {
+//               console.log('Terminado');
+//                //Stop the ion-refresher from spinning
+////                $scope.$broadcast('scroll.refreshComplete');
+//                listaCargada=true;
+//                localStorage.listaCargada=false;
+//                $scope.pararIntervalo();
+//               $scope.datosLista = empresas;
+//           }
+        }, 50,100,true);
+         $timeout (function () {
+             //alert(localStorage.listaCargada);
+             if (localStorage.listaCargada=="false") {
+              alert('No se ha podido cargar el listado');
+              }
+              else{
+                  localStorage.listaCargada="false";
+              }
+           },6000);
+      //}
   };
+  
+  $scope.pararIntervalo = function() {
+        if (angular.isDefined(intervalo)) {
+          $interval.cancel(intervalo);
+          intervalo = undefined;
+        }
+    };
+  
   $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
       //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
@@ -174,19 +205,25 @@ angular.module('List.controllers', [])
       document.getElementById('scriptList').src="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22GOOG%22%2C%22YHOO%22%2C%22MSFT%22%2C%22ORCL%22%2C%22TWTR%22%2C%22CSCO%22%2C%22ADBE%22%2C%22IBM%22%2C%22FB%22%2C%22AAPL%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlcallbackdatos";
   };
   
+
+  $scope.itemLista = function ($index) {
+    if ($scope.datosLista[$index].cambio.substring(0,0)=="-") {
+        $scope.selectedIndex = $index;
+    }
+  }; 
 //  $ionicLoading.hide();
 });
 
 var empresaTop = {sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575.5',cambio:'+37.3(1.3%)'};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png'},
-    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg'},
-    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/microsoft.png'},
-    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/oracle.jpg'},
-    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/twitter.jpg'},
-    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/cisco.jpg'},
-    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/adobe.png'},
-    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/ibm.jpg'},
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/facebook.png'},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/apple.jpg'}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png',signo:''},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg',signo:''},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/microsoft.png',signo:''},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/oracle.jpg',signo:''},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/twitter.jpg',signo:''},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/cisco.jpg',signo:''},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/adobe.png',signo:''},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/ibm.jpg',signo:''},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/facebook.png',signo:''},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/apple.jpg',signo:''}
   ];

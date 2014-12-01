@@ -7,13 +7,15 @@
   </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
       <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
-      <div style="float: left;width: 50%!important;line-height: 0">
+      <div style="float: left;width: 50%!important;line-height: 0;">
           <!--<marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">-->
               <center>
-                  <h5 style="font-size: 1em;margin-top: 1px" class="dark">{{empresaTop.nombre}}</h5>
+                  <h5 style="font-size: 1em;margin-top: 0px" class="dark">{{empresaTop.nombre}}</h5>
                   <!--<b>Google Inc.</b>-->
-                  <b class="textoMarquee" style="font-size: 1.1em">{{empresaTop.cotizacion}}</b>
-                  <b class="balanced textoMarquee" style="font-size: 0.85em">{{empresaTop.cambio}}</b>
+                  <p>
+                      <b style="font-size: 1.1em;">{{empresaTop.cotizacion}}</b>
+                      <b class="textoOcultar balanced" style="font-size: 0.85em">{{empresaTop.cambio}}</b>
+                  </p>
               </center>
           <!--</marquee>-->
       </div>
@@ -36,7 +38,7 @@
                 <b style="color: #000">{{empresa.nombre}}</b>
                 <b class="dark"> ({{empresa.sigla}}):</b>
                 <b style="font-size: 1.1em;color: #000">{{empresa.cotizacion}}</b>
-                <b class="balanced" ng-class="{'active':positive.class_id == activeClass}" style="font-size: 0.85em">{{empresa.cambio}}</b>
+                <b class="balanced" ng-class="{'assertive':empresas[$index].signo=='-','balanced':empresas[$index].signo=='+'}" style="font-size: 0.85em">{{empresa.cambio}}</b>
             </a>
         </div>
         <!--</div>-->
