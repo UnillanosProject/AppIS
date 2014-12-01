@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -88,7 +88,7 @@ angular.module('starter.controllers', [])
 
 //function EmpresasCtrl($scope, /*$http,*/ $interval) {
     //$scope.empresas = empresas;
-    //$scope.empresaTop = empresaTop;
+    $scope.empresaTop = empresaTop;
     $scope.news = [];
     $scope.conf = {
         news_length: false,
@@ -150,52 +150,37 @@ angular.module('starter.controllers', [])
          //alert('Mostrar gráfica');
          //tempAlert('Cargando datos del servidor',3000);
    };
-   var intervalo;
-   $scope.doRefresh = function() {
-    console.log('Refreshing!');
-       //for (i = 0; i < 70; i++) {
-       //if ( angular.isDefined(intervalo) ) return;
-        intervalo = $interval( function() {
-      //simulate async response
-           console.log("En el intervalo, local Storage="+localStorage.listaCargada);
-//            if (localStorage.listaCargada===true) {
-//                listaCargada=true;
-//                //localStorage.listaCargada=false;
-//            }
-//           if (localStorage.listaCargada==true) {
-//               console.log('Terminado');
-//                //Stop the ion-refresher from spinning
-////                $scope.$broadcast('scroll.refreshComplete');
-//                listaCargada=true;
-//                localStorage.listaCargada=false;
-//                $scope.pararIntervalo();
-//               $scope.datosLista = empresas;
-//           }
-        }, 50,100,true);
-         $timeout (function () {
-             //alert(localStorage.listaCargada);
-             if (localStorage.listaCargada=="false") {
-              alert('No se ha podido cargar el listado');
-              }
-              else{
-                 $scope.$apply(function() {
-                 alert("Dentro de Apply");
-            //wrapped this within $apply
-                $scope.empresaTop = empresaTop; 
-                });
-                  localStorage.listaCargada="false";
-              }
-           },6000);
-      //}
-  };
   
-  $scope.pararIntervalo = function() {
-        if (angular.isDefined(intervalo)) {
-          $interval.cancel(intervalo);
-          intervalo = undefined;
+  $scope.yqlcallbackdatos = function (datos) {
+    var mayor=0;
+    var iMayor=0;
+        for (var i = 0; i < datos.query.count; i++) {
+             empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
+             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(7,porcentaje.lenght)+")";
+             empresas[i].rango=datos.query.results.quote[i].DaysRange;
+             empresas[i].signo=porcentaje.substring(6,7);
+             if (empresas[i].signo=="+") {
+                 if (parseFloat(porcentaje.substring(7,11))>mayor) {
+                     mayor=parseFloat(porcentaje.substring(7,11));
+                     iMayor=i;
+                }
+            }
+            if (empresas[i].signo=="-") {
+                 if (parseFloat(porcentaje.substring(7,11))*(-1)>mayor) {
+                     mayor=parseFloat(porcentaje.substring(7,11))*(-1);
+                     iMayor=i;
+                }
+            }
+            //alert(iMayor+" : "+mayor);
         }
+            $scope.empresaTop=empresas[iMayor];
+            //alert($scope.empresaTop.nombre);
+            localStorage.listaCargada="true";
+        
+        //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
     };
-  
+    
   $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
       //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
@@ -207,7 +192,11 @@ angular.module('starter.controllers', [])
   };
   
   $scope.cargarDatosEmpresas = function () {
-      document.getElementById('scriptList').src="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22GOOG%22%2C%22YHOO%22%2C%22MSFT%22%2C%22ORCL%22%2C%22TWTR%22%2C%22CSCO%22%2C%22ADBE%22%2C%22IBM%22%2C%22FB%22%2C%22AAPL%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=yqlcallbackdatos";
+      var url="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22GOOG%22%2C%22YHOO%22%2C%22MSFT%22%2C%22ORCL%22%2C%22TWTR%22%2C%22CSCO%22%2C%22ADBE%22%2C%22IBM%22%2C%22FB%22%2C%22AAPL%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK";
+      $http.jsonp(url)
+        .success(function (data) {
+            $scope.yqlcallbackdatos(data);          
+        });
   };
   
 
