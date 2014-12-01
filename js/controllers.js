@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
             //$scope.textos.login=data.login;
             $scope.textos=data;
             //alert("Text :"+$scope.textos.login);
-        });
+        }); 
    };
     
     $scope.loginData = {};
@@ -24,6 +24,28 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
   });
+  
+  
+//  $ionicModal.fromTemplateUrl('templates/prediction.html', {
+//    scope: $scope
+//  }).then(function(modal2) {
+//    $scope.modal = modal2;
+//  });
+//  $scope.pred = function() {
+//    $scope.modal.shows();
+//  };
+//  $scope.shows = function() {
+//      alert("entre");
+//    $ionicLoading.show({
+//        content: 'Loading',
+//        animation: 'fade-in',
+//        showBackdrop: true,
+//        maxWidth: 200,
+//        showDelay: 0
+//    });
+//  };
+  
+  
   $scope.guardarPrincipal = function () {
           localStorage.setItem('principal',$scope);  
       };
@@ -108,7 +130,7 @@ angular.module('starter.controllers', [])
                localStorage.listaCargada="false";
                $scope.init();
           }   
-     },50,200);
+     },75,200);
   };
 //  });
 
@@ -226,7 +248,10 @@ angular.module('starter.controllers', [])
         //alert("Dentro de YQL");
             $scope.empresaTop=empresas[iMayor];
             //alert($scope.empresaTop.nombre);
-            localStorage.listaCargada="true";      
+            localStorage.listaCargada="true";
+            $timeout(function () {
+                    $scope.datosLista=empresas;
+                },100);
         //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
     };
     
@@ -253,6 +278,22 @@ angular.module('starter.controllers', [])
     if ($scope.datosLista[$index].cambio.substring(0,0)=="-") {
         $scope.selectedIndex = $index;
     }
+  };
+  
+  $scope.serverSideList = [
+    { text: "Español", value: "es" },
+    { text: "English", value: "en" },
+    { text: "Portugës", value: "pt" },
+    { text: "Deutsch", value: "de" }
+  ];
+
+  $scope.data = {
+    serverSide: 'en'
+  };
+  
+  $scope.serverSideChange = function(item) {
+      $scope.cargarIdioma(item.value);
+    //console.log("Selected Serverside, text:", item.text, "value:", item.value);
   };
 //  $ionicLoading.hide();
 });

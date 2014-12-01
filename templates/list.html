@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="starter">
-  <head>
+  <head> 
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
@@ -37,11 +37,11 @@
 
   </head>
 
-  <body ng-controller="AppCtrl" ng-init="cargarDatosEmpresas();" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
+  <body ng-controller="AppCtrl" ng-init="cargarDatosEmpresas()" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" rightmargin="0">
   <ion-content>
       <div class="list">
           <div class="item item-divider">
-            Acciones
+            {{textos.actions}}
         </div>
           <div ng-repeat="empresa in datosLista" class="item item-avatar item-button-right" style="padding-bottom:5px">
       <img class="bajarImagen" src="{{empresa.imagen}}">
@@ -54,7 +54,7 @@
         </button>
     </div>
           <div class="item item-divider">
-            Divisas
+            {{textos.exchange}}
         </div>
       </div>
 </ion-content>

@@ -8,7 +8,7 @@ $(function () {
         },
         title: {
             text: 'USD to EUR'
-        },
+        }, 
         subtitle: {
             text: document.ontouchstart === undefined ?
                     '' :

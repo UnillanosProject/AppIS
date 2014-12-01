@@ -1,3 +1,16 @@
 {
-    "login":"Iniciar sesión"
+    "login":"Iniciar sesión",
+    "prediction":"Prediccion",
+    "viability":"Viabilidad",
+    "language":"Lenguaje",
+    "instruction":"Instrucciones",
+    "about":"Acerca de",
+    "actions":"Acciones",
+    "exchange":"Divisas",
+    "username":"Nombre de usuario",
+    "password":"Contraseña",
+    "close":"Cerrar",
+    "developers":"Desarrolladores",
+    "program":"Ing. Sistemas",
+    "tools":"Herramientas" 
 }
