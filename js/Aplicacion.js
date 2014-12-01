@@ -59,19 +59,21 @@ var yqlcallbackdatos = function (datos) {
              empresas[i].rango=datos.query.results.quote[i].DaysRange;
              empresas[i].signo=porcentaje.substring(6,7);
              if (empresas[i].signo=="+") {
-                 if (parseFloat(porcentaje.substring(7,porcentaje.lenght))>mayor) {
-                     mayor=parseFloat(porcentaje.substring(7,porcentaje.lenght-1));
-                     iMayor==i;
+                 if (parseFloat(porcentaje.substring(7,11))>mayor) {
+                     mayor=parseFloat(porcentaje.substring(7,11));
+                     iMayor=i;
                 }
             }
             if (empresas[i].signo=="-") {
-                 if (parseFloat(porcentaje.substring(7,porcentaje.lenght))>mayor) {
-                     mayor=parseFloat(porcentaje.substring(7,porcentaje.lenght-1))*(-1);
-                     iMayor==i;
+                 if (parseFloat(porcentaje.substring(7,11))*(-1)>mayor) {
+                     mayor=parseFloat(porcentaje.substring(7,11))*(-1);
+                     iMayor=i;
                 }
             }
-            empresasTop=empresas[iMayor];
+            //alert(iMayor+" : "+mayor);
         }
+            empresaTop=empresas[iMayor];
+            //alert(empresaTop.nombre);
             localStorage.listaCargada="true";
         
         //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);

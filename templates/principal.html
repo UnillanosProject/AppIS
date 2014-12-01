@@ -3,10 +3,10 @@
   <ion-nav-buttons>
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     <div class="h1 title"></div>
-    <button ng-controller="BotonCtrl" id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
+    <button  id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
     <ion-content class="has-header" scroll="false">
-        <div class="bar gradiente" ng-controller="EmpresasCtrl" style="float: top" scroll="false">
+        <div class="bar gradiente" style="float: top" scroll="false">
       <div style="float: left;width: 50%!important;line-height: 0;">
           <!--<marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">-->
               <center>
@@ -38,7 +38,7 @@
                 <b style="color: #000">{{empresa.nombre}}</b>
                 <b class="dark"> ({{empresa.sigla}}):</b>
                 <b style="font-size: 1.1em;color: #000">{{empresa.cotizacion}}</b>
-                <b class="balanced" ng-class="{'assertive':empresas[$index].signo=='-','balanced':empresas[$index].signo=='+'}" style="font-size: 0.85em">{{empresa.cambio}}</b>
+                <b class="balanced" ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 0.85em">{{empresa.cambio}}</b>
             </a>
         </div>
         <!--</div>-->

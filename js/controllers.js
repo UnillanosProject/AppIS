@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -31,8 +31,8 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
-})
-.controller('LoadingCtrl', function($scope, $ionicLoading) {
+//})
+//.controller('LoadingCtrl', function($scope, $ionicLoading) {
   $scope.show = function() {
 //    $ionicLoading.show({
 //        content: 'Loading',
@@ -45,8 +45,8 @@ angular.module('starter.controllers', [])
   $scope.hide = function(){
     $ionicLoading.hide();
   };
-})
-.controller('ControllerRefresh', function($scope, $http) {
+//})
+//.controller('ControllerRefresh', function($scope, $http) {
   $scope.doRefresh = function() {
       alert('Fuera de get');
     $http.get('')
@@ -56,12 +56,12 @@ angular.module('starter.controllers', [])
      .finally(function() {
      });
   };
-  })
-  .controller('BotonCtrl', function($scope) {
+//  })
+//  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
       document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
   };
-  });
+//  });
 
 //.controller('PlaylistsCtrl', function($scope) {
 //  $scope.playlists = [
@@ -86,9 +86,9 @@ angular.module('starter.controllers', [])
 //.controller('PlaylistCtrl', function($scope, $stateParams) {
 //});
 
-function EmpresasCtrl($scope, /*$http,*/ $interval) {
-    $scope.empresas = empresas;
-    $scope.empresaTop = empresaTop;
+//function EmpresasCtrl($scope, /*$http,*/ $interval) {
+    //$scope.empresas = empresas;
+    //$scope.empresaTop = empresaTop;
     $scope.news = [];
     $scope.conf = {
         news_length: false,
@@ -128,11 +128,11 @@ function EmpresasCtrl($scope, /*$http,*/ $interval) {
             }
         }
     };
-}
+//}
 
-angular.module('List.controllers', [])
+//angular.module('List.controllers', [])
 //.controller('ListsCtrl', function($scope,$ionicLoading) {
- .controller('ListsCtrl', function($scope,$timeout,$interval) {
+// .controller('ListsCtrl', function($scope,$timeout,$interval) {
 //    $ionicLoading.show({
 //	    content: 'Loading Data',
 //	    animation: 'fade-in',
@@ -178,6 +178,11 @@ angular.module('List.controllers', [])
               alert('No se ha podido cargar el listado');
               }
               else{
+                 $scope.$apply(function() {
+                 alert("Dentro de Apply");
+            //wrapped this within $apply
+                $scope.empresaTop = empresaTop; 
+                });
                   localStorage.listaCargada="false";
               }
            },6000);
@@ -210,11 +215,11 @@ angular.module('List.controllers', [])
     if ($scope.datosLista[$index].cambio.substring(0,0)=="-") {
         $scope.selectedIndex = $index;
     }
-  }; 
+  };
 //  $ionicLoading.hide();
 });
 
-var empresaTop = { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'575',cambio:'0.38',rango:'58%',imagen:'../img/google.png',signo:''};
+var empresaTop = { sigla: 'GOOG', nombre: 'Google',cotizacion:'575',cambio:'0.38',rango:'58%',imagen:'../img/google.png',signo:''};
 var empresas = [
     { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png',signo:''},
     { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg',signo:''},
