@@ -284,8 +284,9 @@ angular.module('starter.controllers', [])
   
   $scope.serverSideChange = function(item) {
       $scope.cargarIdioma(item.value);
+      localStorage.idioma=item.value;
     //console.log("Selected Serverside, text:", item.text, "value:", item.value);
-    window.location.href="#/app/principal";
+    //window.location.href="#/app/principal";
   };
 //  $ionicLoading.hide();
 $scope.enviarCorreo = function (correo) {
@@ -295,9 +296,9 @@ $scope.enviarCorreo = function (correo) {
     
     $scope.datosLista = empresas;
     $scope.textos={};
-    $scope.cargarIdioma = function (lenguaje) {
+    $scope.cargarIdioma = function () {
       
-      var url="../Lenguajes/"+lenguaje+".json";
+      var url="../Lenguajes/"+localStorage.idioma+".json";
       $http.get(url)
         .success(function (data) {
 //            alert(data.login);
@@ -309,7 +310,7 @@ $scope.enviarCorreo = function (correo) {
    };
      $scope.imprimirValorLista = function () {
               alert($scope.datosLista[0].cotizacion);  
-            };
+            };  
     
     $scope.yqlcallbackdatos = function (datos) {
     var mayor=0;
@@ -395,3 +396,4 @@ var empresas = [
     { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/facebook.png',signo:''},
     { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/apple.jpg',signo:''}
   ];
+  localStorage.idioma='en';
