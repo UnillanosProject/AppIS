@@ -75,21 +75,6 @@ angular.module('starter.controllers', [])
      };
 //})
 //.controller('LoadingCtrl', function($scope, $ionicLoading) {
-  $scope.show = function() {
-    $ionicLoading.show({
-        content: 'Loading',
-        animation: 'fade-in',
-        showBackdrop: true,
-        maxWidth: 200,
-        showDelay: 0
-    });
-    $interval(function () {
-          if (localStorage.graficoCargado=="true") {
-              localStorage.graficoCargado="false";
-               $scope.hide();               
-          }   
-     },50,70);
-  };
   $scope.show2 = function() {
     $ionicLoading.show({
         content: 'Loading',
@@ -104,9 +89,6 @@ angular.module('starter.controllers', [])
                localStorage.listaCargada="false";
           }   
      },50,70);
-  };
-  $scope.hide = function(){
-    $ionicLoading.hide();
   };
 //})
 //.controller('ControllerRefresh', function($scope, $http) {
@@ -251,14 +233,23 @@ angular.module('starter.controllers', [])
             localStorage.listaCargada="true";
             $timeout(function () {
                     $scope.datosLista=empresas;
+                    //$rootScope.$broadcast('actualizarLista');
+//                    var body = angular.element(document.querySelector('#objectLista')).scope().actualizarLista(empresas);
+                    //angular.element(body).scope().actualizarLista(empresas);
                 },100);
         //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
     };
-    
-  $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
-      //alert(empresa);
-        window.parent.cambiarGrafico(empresa,nombreEmpresa);
-    };
+  
+  $scope.actualizarLista =  function (listado) {
+           $timeout(function () {
+//               alert(listado[0].cotizacion);
+                 $scope.datosLista=listado;
+            },100);
+      };
+  $scope.obtenerBody= function (listado) {
+              angular.element(document.querySelector("#body")).scope().datosLista=listado;  
+            };
+  
   
   $scope.loadRoster=function(classlist){
     $scope.selectedClass=classlist;
@@ -294,8 +285,101 @@ angular.module('starter.controllers', [])
   $scope.serverSideChange = function(item) {
       $scope.cargarIdioma(item.value);
     //console.log("Selected Serverside, text:", item.text, "value:", item.value);
+    window.location.href="#/app/principal";
   };
 //  $ionicLoading.hide();
+$scope.enviarCorreo = function (correo) {
+        window.location.href='mailto:'+correo;
+    };
+}).controller('ListCtrl', function($scope,$timeout,$interval,$http,$ionicLoading) {
+    
+    $scope.datosLista = empresas;
+    $scope.textos={};
+    $scope.cargarIdioma = function (lenguaje) {
+      
+      var url="../Lenguajes/"+lenguaje+".json";
+      $http.get(url)
+        .success(function (data) {
+//            alert(data.login);
+            //$scope.textos.login=data.login;
+            $scope.textos=data;
+//            alert($scope.textos.actions);
+            //alert("Text :"+$scope.textos.login);
+        }); 
+   };
+     $scope.imprimirValorLista = function () {
+              alert($scope.datosLista[0].cotizacion);  
+            };
+    
+    $scope.yqlcallbackdatos = function (datos) {
+    var mayor=0;
+    var iMayor=0;
+        for (var i = 0; i < datos.query.count; i++) {
+             empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
+             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(7,porcentaje.lenght)+")";
+             empresas[i].rango=datos.query.results.quote[i].DaysRange;
+             empresas[i].signo=porcentaje.substring(6,7);
+//             if (empresas[i].signo=="+") {
+//                 if (parseFloat(porcentaje.substring(7,11))>mayor) {
+//                     mayor=parseFloat(porcentaje.substring(7,11));
+//                     iMayor=i;
+//                }
+//            }
+//            if (empresas[i].signo=="-") {
+//                 if (parseFloat(porcentaje.substring(7,11))*(-1)>mayor) {
+//                     mayor=parseFloat(porcentaje.substring(7,11))*(-1);
+//                     iMayor=i;
+//                }
+//            }
+            //alert(iMayor+" : "+mayor);
+        }
+        //alert("Dentro de YQL");
+//            $scope.empresaTop=empresas[iMayor];
+            //alert($scope.empresaTop.nombre);
+//            localStorage.listaCargada="true";
+            $timeout(function () {
+                    $scope.datosLista=empresas;
+                    //$rootScope.$broadcast('actualizarLista');
+//                    var body = angular.element(document.querySelector('#objectLista')).scope().actualizarLista(empresas);
+                    //angular.element(body).scope().actualizarLista(empresas);
+                },100);
+        //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
+    };
+    
+    $scope.cargarDatosEmpresas = function () {
+      var url="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22GOOG%22%2C%22YHOO%22%2C%22MSFT%22%2C%22ORCL%22%2C%22TWTR%22%2C%22CSCO%22%2C%22ADBE%22%2C%22IBM%22%2C%22FB%22%2C%22AAPL%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK";
+      $http.jsonp(url)
+        .success(function (data) {
+            $scope.yqlcallbackdatos(data);          
+        });
+  };
+    
+    $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
+      //alert(empresa);
+        window.parent.cambiarGrafico(empresa,nombreEmpresa);
+    };
+    
+    $scope.show = function() {
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+    
+    $scope.hide = function(){
+    $ionicLoading.hide();
+  };
+    
+    $interval(function () {
+          if (localStorage.graficoCargado=="true") {
+              localStorage.graficoCargado="false";
+               $scope.hide();               
+          }   
+     },50,70);
+  };
 });
 
 var empresaTop = { sigla: 'GOOG', nombre: 'Google',cotizacion:'575',cambio:'0.38',rango:'58%',imagen:'../img/google.png',signo:''};

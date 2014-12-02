@@ -20,9 +20,9 @@ function cambiarGrafico(sigla,nombreEmpresa) {
     //document.getElementById('objectGrafico').contentWindow.cargarDatosFinance();
     var grafico = document.getElementById('objectGrafico');
 //    alert(sigla);
-//    grafico.contentWindow.cargarDatosFinance(sigla,nombreEmpresa);
+        grafico.contentWindow.cargarDatosFinance(sigla,nombreEmpresa);
 //    grafico.data="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
-    grafico.src="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
+//    grafico.src="templates/Grafica.html?sigla="+sigla+"&nombre="+nombreEmpresa;
     //grafico.src=grafico.src;
     //var content = grafico.innerHTML;
    //alert(content);
