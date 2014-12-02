@@ -96,7 +96,7 @@ $scope.hide = function(){
           }
           if ($scope.veces==99) {
                $scope.hide();
-          }
+          } 
      },50,70);
   };
 //})
