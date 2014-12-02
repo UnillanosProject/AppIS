@@ -75,7 +75,11 @@ angular.module('starter.controllers', [])
      };
 //})
 //.controller('LoadingCtrl', function($scope, $ionicLoading) {
-  $scope.show2 = function() {
+$scope.hide = function(){
+    $ionicLoading.hide();
+  };
+  $scope.show = function() {
+      $scope.veces=0;
     $ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
@@ -83,11 +87,16 @@ angular.module('starter.controllers', [])
         maxWidth: 200,
         showDelay: 0
     });
+    
     $interval(function () {
+        $scope.veces++;
           if (localStorage.listaCargada=="true") {
                $scope.hide();
                localStorage.listaCargada="false";
-          }   
+          }
+          if ($scope.veces==99) {
+               $scope.hide();
+          }
      },50,70);
   };
 //})
@@ -208,11 +217,20 @@ angular.module('starter.controllers', [])
     var mayor=0;
     var iMayor=0;
         for (var i = 0; i < datos.query.count; i++) {
-             empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             empresas[i].cotizacion=datos.query.results.quote[i].AskRealtime;
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
-             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(7,porcentaje.lenght)+")";
-             empresas[i].rango=datos.query.results.quote[i].DaysRange;
+             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime;
              empresas[i].signo=porcentaje.substring(6,7);
+             //alert(porcentaje.substring(7,11));
+                    if (empresas[i].signo=="+") {
+                        empresas[i].porcentaje=parseFloat(porcentaje.substring(7,11));
+                    }
+                    else{
+                        empresas[i].porcentaje=parseFloat(porcentaje.substring(7,11))*(-1);
+                    }
+                        
+             empresas[i].rango=datos.query.results.quote[i].DaysRange;
+             
              if (empresas[i].signo=="+") {
                  if (parseFloat(porcentaje.substring(7,11))>mayor) {
                      mayor=parseFloat(porcentaje.substring(7,11));
@@ -230,7 +248,7 @@ angular.module('starter.controllers', [])
         //alert("Dentro de YQL");
             $scope.empresaTop=empresas[iMayor];
             //alert($scope.empresaTop.nombre);
-            localStorage.listaCargada="true";
+//            localStorage.listaCargada="true";
             $timeout(function () {
                     $scope.datosLista=empresas;
                     //$rootScope.$broadcast('actualizarLista');
@@ -316,11 +334,19 @@ $scope.enviarCorreo = function (correo) {
     var mayor=0;
     var iMayor=0;
         for (var i = 0; i < datos.query.count; i++) {
-             empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             empresas[i].cotizacion=datos.query.results.quote[i].AskRealtime;
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
-             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime+" ("+porcentaje.substring(7,porcentaje.lenght)+")";
-             empresas[i].rango=datos.query.results.quote[i].DaysRange;
+             empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime;
              empresas[i].signo=porcentaje.substring(6,7);
+             //alert(porcentaje.substring(7,11));
+                    if (empresas[i].signo=="+") {
+                        empresas[i].porcentaje=parseFloat(porcentaje.substring(7,11));
+                    }
+                    else{
+                        empresas[i].porcentaje=parseFloat(porcentaje.substring(7,11))*(-1);
+                    }
+                        
+             empresas[i].rango=datos.query.results.quote[i].DaysRange;
 //             if (empresas[i].signo=="+") {
 //                 if (parseFloat(porcentaje.substring(7,11))>mayor) {
 //                     mayor=parseFloat(porcentaje.substring(7,11));
@@ -338,7 +364,7 @@ $scope.enviarCorreo = function (correo) {
         //alert("Dentro de YQL");
 //            $scope.empresaTop=empresas[iMayor];
             //alert($scope.empresaTop.nombre);
-//            localStorage.listaCargada="true";
+            localStorage.listaCargada="true";
             $timeout(function () {
                     $scope.datosLista=empresas;
                     //$rootScope.$broadcast('actualizarLista');
@@ -362,6 +388,7 @@ $scope.enviarCorreo = function (correo) {
     };
     
     $scope.show = function() {
+    $scope.veces=0;
     $ionicLoading.show({
         content: 'Loading',
         animation: 'fade-in',
@@ -373,27 +400,31 @@ $scope.enviarCorreo = function (correo) {
     $scope.hide = function(){
     $ionicLoading.hide();
   };
-    
     $interval(function () {
+        $scope.veces++;
           if (localStorage.graficoCargado=="true") {
               localStorage.graficoCargado="false";
                $scope.hide();               
-          }   
-     },50,70);
+          }
+          if ($scope.veces==99) {
+               //alert("Conexión Fallida, verifique su acceso a internet");
+               $scope.hide();
+          }
+     },50,100);
   };
 });
 
-var empresaTop = { sigla: 'GOOG', nombre: 'Google',cotizacion:'575',cambio:'0.38',rango:'58%',imagen:'../img/google.png',signo:''};
+var empresaTop = { sigla: 'GOOG', nombre: 'Google',cotizacion:'575',cambio:'0.38',porcentaje:'',rango:'58%',imagen:'../img/google.png',signo:''};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/google.png',signo:''},
-    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/yahoo.jpg',signo:''},
-    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/microsoft.png',signo:''},
-    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/oracle.jpg',signo:''},
-    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/twitter.jpg',signo:''},
-    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/cisco.jpg',signo:''},
-    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',rango:'',imagen:'../img/adobe.png',signo:''},
-    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',rango:'',imagen:'../img/ibm.jpg',signo:''},
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/facebook.png',signo:''},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',rango:'',imagen:'../img/apple.jpg',signo:''}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/yahoo.jpg',signo:''},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/microsoft.png',signo:''},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/oracle.jpg',signo:''},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/twitter.jpg',signo:''},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/cisco.jpg',signo:''},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/adobe.png',signo:''},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/ibm.jpg',signo:''},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/facebook.png',signo:''},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/apple.jpg',signo:''}
   ];
   localStorage.idioma='en';

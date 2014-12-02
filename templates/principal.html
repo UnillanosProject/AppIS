@@ -6,7 +6,7 @@
     <button  id="botonCargar" ng-click="cargar()" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
 <!--    <ion-header-bar class="bar-subheader" style="height: 270px">-->
-        <ion-content class="has-header" ng-init="cargarDatosEmpresas();">
+        <ion-content class="has-header" ng-init="show();cargarDatosEmpresas();">
         <!--<button id="botonGrafico" ng-click="show()" ng-hide="true"></button>-->
         <div class="bar gradiente" style="float: top" scroll="false">
       <div style="float: left;width: 50%!important;line-height: 0;">
@@ -16,7 +16,7 @@
                   <!--<b>Google Inc.</b>-->
                   <p>
                       <b style="font-size: 1.1em;">{{empresaTop.cotizacion}}</b>
-                      <b class="textoOcultar balanced" style="font-size: 0.85em">{{empresaTop.cambio}}</b>
+                      <b class="textoOcultar balanced" style="font-size: 0.85em">{{empresaTop.cambio}}({{empresaTop.porcentaje}})</b>
                   </p>
               </center>
           <!--</marquee>-->
@@ -40,7 +40,7 @@
                 <b style="color: #000">{{empresa.nombre}}</b>
                 <b class="dark"> ({{empresa.sigla}}):</b>
                 <b style="font-size: 1.1em;color: #000">{{empresa.cotizacion}}</b>
-                <b class="balanced" ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 0.85em">{{empresa.cambio}}</b>
+                <b class="balanced" ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 0.85em">{{empresa.cambio}}({{empresa.porcentaje}})</b>
             </a>
         </div>
         <!--</div>-->
