@@ -96,14 +96,13 @@ $scope.hide = function(){
     $interval(function () {
         $scope.veces++;
           if (localStorage.listaCargada=="true") {
-              localStorage.listaCargada="false";
-               $scope.hide();
-          }
-//          if ($scope.veces==320) {
-//               $scope.hide();
-//               alert('Conexión Fallida o Inestable\nRevisela e Intentelo de Nuevo');
-//          } 
-     },50,350);
+                $scope.hide();
+                localStorage.listaCargada="false";
+                }
+                if ($scope.veces==99) {
+                $scope.hide();
+            } 
+     },50,70);
   };
 //})
 //.controller('ControllerRefresh', function($scope, $http) {
