@@ -99,11 +99,24 @@ $scope.hide = function(){
                 $scope.hide();
                 localStorage.listaCargada="false";
                 }
-                if ($scope.veces==69) {
+                if ($scope.veces==199) {
                 $scope.hide();
+                //Aqui se puede poner algo que avise que no hay conexión a internet
             } 
-     },50,70);
+     },50,200);
   };
+  
+   $scope.show2 = function() {
+      $scope.veces=0;
+    $ionicLoading.show({
+        //content: 'Loading',
+        templateUrl: 'templates/cargando.html',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+   }
 //})
 //.controller('ControllerRefresh', function($scope, $http) {
   $scope.doRefresh = function() {
@@ -120,7 +133,7 @@ $scope.hide = function(){
   $scope.cargar = function() {
 //      $scope.checkConnection();
       //document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
-      $scope.show();
+      $scope.show2();
       $scope.cargarDatosEmpresas();
       $interval(function () {
           if (localStorage.listaCargada=="true") {
