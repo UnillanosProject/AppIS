@@ -85,8 +85,7 @@ $scope.hide = function(){
   $scope.show = function() {
       $scope.veces=0;
     $ionicLoading.show({
-        //content: 'Loading',
-        templateUrl: 'templates/cargando.html',
+        content: 'Loading',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
@@ -119,14 +118,21 @@ $scope.hide = function(){
 //  })
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
+<<<<<<< HEAD
       $scope.checkConnection();
+=======
+>>>>>>> parent of 2a1126a... leve modificacion: about(enlace correo: fallando) - cargando(nuevo icono) - network(fallando: aveces detecta la conexion)
       document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
       $scope.cargarDatosEmpresas();
       $interval(function () {
           if (localStorage.listaCargada=="true") {
                document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
                localStorage.listaCargada="false";
+<<<<<<< HEAD
                //$scope.init();
+=======
+               $scope.init();
+>>>>>>> parent of 2a1126a... leve modificacion: about(enlace correo: fallando) - cargando(nuevo icono) - network(fallando: aveces detecta la conexion)
           }   
      },75,200);
   };
@@ -329,6 +335,7 @@ $scope.hide = function(){
   };
 //  $ionicLoading.hide();
 $scope.enviarCorreo = function (correo) {
+<<<<<<< HEAD
         location.href='mailto:'+correo;
     };
     
@@ -356,10 +363,11 @@ $scope.enviarCorreo = function (correo) {
 //            alert("Entre");
 //        }
         //localStorage.network=networkState;
+=======
+        window.location.href='mailto:'+correo;
+>>>>>>> parent of 2a1126a... leve modificacion: about(enlace correo: fallando) - cargando(nuevo icono) - network(fallando: aveces detecta la conexion)
     };
-})
-        
-.controller('ListCtrl', function($scope,$timeout,$interval,$http,$ionicLoading) {
+}).controller('ListCtrl', function($scope,$timeout,$interval,$http,$ionicLoading) {
     
     $scope.datosLista = empresas;
     $scope.textos={};
@@ -452,12 +460,11 @@ $scope.enviarCorreo = function (correo) {
     $scope.show = function() {
     $scope.veces=0;
     $ionicLoading.show({
-        //content: 'Loading',
-        templateUrl: 'templates/cargando.html',
+        content: 'Loading',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
-        showDelay: 0 
+        showDelay: 0
     });
     
     $interval(function () {
