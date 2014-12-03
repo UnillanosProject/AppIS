@@ -81,7 +81,8 @@ $scope.hide = function(){
   $scope.show = function() {
       $scope.veces=0;
     $ionicLoading.show({
-        content: 'Loading',
+        //content: 'Loading',
+        templateUrl: 'templates/cargando.html',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
@@ -114,14 +115,23 @@ $scope.hide = function(){
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
       document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
-      $scope.cargarDatosEmpresas();
+      //$scope.cargarDatosEmpresas();
+      $scope.checkConnection();
+      var conect="Estable";
+      //alert(localStorage.network);
       $interval(function () {
-          if (localStorage.listaCargada=="true") {
+          if (localStorage.network=="unknown" || localStorage.network=="none") {
                document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
-               localStorage.listaCargada="false";
-               $scope.init();
-          }   
-     },75,200);
+               conect="Inestable o Nula";
+          }else{
+              if (localStorage.listaCargada=="true") {
+                    document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
+                    localStorage.listaCargada="false";
+                    $scope.init();
+               }
+          }      
+     },10,20);
+     alert('Conexion '+conect);
   };
 //  });
 
@@ -308,9 +318,32 @@ $scope.hide = function(){
   };
 //  $ionicLoading.hide();
 $scope.enviarCorreo = function (correo) {
-        window.location.href='mailto:'+correo;
+        location.href='mailto:'+correo;
     };
-}).controller('ListCtrl', function($scope,$timeout,$interval,$http,$ionicLoading) {
+    
+    $scope.checkConnection = function(){
+        var networkState = navigator.network.connection.type;
+    
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.CELL]     = 'Cell generic connection';
+        states[Connection.NONE]     = 'No network connection';
+        //alert(networkState);
+        alert('Connection type: ' + states[networkState]);
+//        document.addEventListener ("offline", onOffline, false);
+//        function onOffline() {
+//            alert("Entre");
+//        }
+        localStorage.network=networkState;
+    };
+})
+        
+.controller('ListCtrl', function($scope,$timeout,$interval,$http,$ionicLoading) {
     
     $scope.datosLista = empresas;
     $scope.textos={};
@@ -390,11 +423,12 @@ $scope.enviarCorreo = function (correo) {
     $scope.show = function() {
     $scope.veces=0;
     $ionicLoading.show({
-        content: 'Loading',
+        //content: 'Loading',
+        templateUrl: 'templates/cargando.html',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
-        showDelay: 0
+        showDelay: 0 
     });
     
     $scope.hide = function(){

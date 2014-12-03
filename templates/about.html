@@ -10,18 +10,20 @@
             <center><font size="6"><b>{{textos.developers}}</b></font></center>
         </div>
         <div class="item item-thumbnail-left">
+            <!--<button ng-controller="AppCrtl" ng-click="enviarCorreo()"></button>-->
             <img src="img/arango.jpg">
             <font size=4><b>Edison Ruben Arango</b></font>
             <h2>{{textos.program}}</h2>
-            <h3>edisonarab@gmail.com</h3>
-            <!--<a href="mailto:edisonarab@gmail.com"><u>edisonarab@gmail.com</u></a>-->
+            <!--<h3>edisonarab@gmail.com</h3>-->
+            <a ng-click="enviarCorreo('edisonarab@gmail.com')"><u>edisonarab@gmail.com</u></a>
+            <!--<button class="button button-icon" ng-click="enviarCorreo()">edisonarab@gmail.com</button>-->
         </div>
         <div class="item item-thumbnail-left">
             <img src="img/castro.jpg">
             <font size=4><b>Juan Sebastian Castro</b></font>
             <h2>{{textos.program}}</h2>
-            <h3>juanseca_94@hotmail.com</h3>
-            <!--<a ng-href="mailto:juanseca_94@hotmail.com"><u>juanseca_94@hotmail.com</u></a>-->
+            <a ng-click="enviarCorreo('juanseca_94@hotmail.com')"><u>juanseca_94@hotmail.com</u></a>
+            <!--<a ng-href="mailto:edisonarab@gmail.com" style="text-decoration:none"><p>juanseca_94@hotmail.com</p></a>-->
         </div>
         <br>
         <div class="item item-content" style="background: #F5F5F5">
