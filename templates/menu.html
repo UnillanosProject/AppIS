@@ -12,7 +12,7 @@
       <h1 class="title">{{textos.menu}}</h1>
     </header>
     <ion-content class="has-header" ng-init="cargarIdioma('en');">
-      <ion-list>
+      <ion-list style="float: top">
         <ion-item nav-clear menu-close ng-click="login()">
             {{textos.login}}
         </ion-item>
@@ -33,6 +33,12 @@
           {{textos.about}}
         </ion-item>
       </ion-list>
+        <div class="item">
+            {{textos.update}}
+        </div>
+        <div class="item">
+            {{horaCarga}}
+        </div>
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>
