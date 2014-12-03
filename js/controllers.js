@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading,$state) {
   // Form data for the login modal
     //$scope.lenguaje="es";
     $scope.textos={};
@@ -12,12 +12,16 @@ angular.module('starter.controllers', [])
             //alert(data.login);
             //$scope.textos.login=data.login;
             $scope.textos=data;
+            localStorage.idioma=lenguaje;
             //alert("Text :"+$scope.textos.login);
         }); 
    };
     
     $scope.loginData = {};
-
+    
+    $scope.irAPag = function (pag) {
+              $state.go(pag);  
+            };
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -95,10 +99,11 @@ $scope.hide = function(){
                $scope.hide();
                localStorage.listaCargada="false";
           }
-          if ($scope.veces==99) {
+          if ($scope.veces==320) {
                $scope.hide();
-          }
-     },50,70);
+               alert('Conexión Fallida o Inestable\nRevisela e Intentelo de Nuevo');
+          } 
+     },50,350);
   };
 //})
 //.controller('ControllerRefresh', function($scope, $http) {
@@ -114,24 +119,16 @@ $scope.hide = function(){
 //  })
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
-      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
-      //$scope.cargarDatosEmpresas();
       $scope.checkConnection();
-      var conect="Estable";
-      //alert(localStorage.network);
+      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+      $scope.cargarDatosEmpresas();
       $interval(function () {
-          if (localStorage.network=="unknown" || localStorage.network=="none") {
+          if (localStorage.listaCargada=="true") {
                document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
-               conect="Inestable o Nula";
-          }else{
-              if (localStorage.listaCargada=="true") {
-                    document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
-                    localStorage.listaCargada="false";
-                    $scope.init();
-               }
-          }      
-     },10,20);
-     alert('Conexion '+conect);
+               localStorage.listaCargada="false";
+               //$scope.init();
+          }   
+     },75,200);
   };
 //  });
 
@@ -173,7 +170,7 @@ $scope.hide = function(){
     $scope.init = function() {
         /*$http.post('the_news_file.json', null).success(function(data) {
             if (data && data.length > 0) {*/
-                $scope.news = empresas;
+                $scope.news = empresasNoticias;
                 $interval($scope.news_move ,0);
         /*  }
         });*/
@@ -212,7 +209,8 @@ $scope.hide = function(){
 //	    maxWidth: 200,
 //	    showDelay: 500
 //	});
-  $scope.datosLista = empresas;
+    $scope.horaCarga="--:--:--";
+    $scope.datosLista = empresas;
 //  $scope.actualizarLista = function () {
 //         $scope.datosLista = empresas;
 //         //$scope.$broadcast('scroll.refreshComplete');
@@ -228,6 +226,9 @@ $scope.hide = function(){
     var iMayor=0;
         for (var i = 0; i < datos.query.count; i++) {
              empresas[i].cotizacion=datos.query.results.quote[i].AskRealtime;
+             if(empresas[i].cotizacion="0.00"){
+                 empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             }
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
              empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime;
              empresas[i].signo=porcentaje.substring(6,7);
@@ -255,15 +256,25 @@ $scope.hide = function(){
             }
             //alert(iMayor+" : "+mayor);
         }
+        empresasNoticias=empresas.slice();
         //alert("Dentro de YQL");
-            $scope.empresaTop=empresas[iMayor];
+//        $scope.horaCarga=datos.query.created;
             //alert($scope.empresaTop.nombre);
 //            localStorage.listaCargada="true";
+//alert(empresas.length);
+//            sessionStorage.setItem("datosLista",empresas);
+//            alert(sessionStorage.datosLista[0].nombre);
+            sessionStorage.metodo="actualizar";
             $timeout(function () {
-                    $scope.datosLista=empresas;
+                    $scope.empresaTop=empresas[iMayor];
+                    //$scope.datosLista=empresas;
+                    $scope.empresasNoticias=empresasNoticias;
+                    $scope.horaCarga=datos.query.created;
+                    //alert($scope.horaCarga);
                     //$rootScope.$broadcast('actualizarLista');
 //                    var body = angular.element(document.querySelector('#objectLista')).scope().actualizarLista(empresas);
                     //angular.element(body).scope().actualizarLista(empresas);
+                    $scope.init();
                 },100);
         //alert(empresas[9].cotizacion+"\n"+empresas[9].cambio+"\n"+empresas[9].rango);
     };
@@ -335,11 +346,16 @@ $scope.enviarCorreo = function (correo) {
         states[Connection.NONE]     = 'No network connection';
         //alert(networkState);
         alert('Connection type: ' + states[networkState]);
+        if(networkState=="none"){
+            alert('Conexión Fallida o Inestable');
+        }else{
+            alert('Conexión Exitosa');
+        }
 //        document.addEventListener ("offline", onOffline, false);
 //        function onOffline() {
 //            alert("Entre");
 //        }
-        localStorage.network=networkState;
+        //localStorage.network=networkState;
     };
 })
         
@@ -368,6 +384,9 @@ $scope.enviarCorreo = function (correo) {
     var iMayor=0;
         for (var i = 0; i < datos.query.count; i++) {
              empresas[i].cotizacion=datos.query.results.quote[i].AskRealtime;
+             if(empresas[i].cotizacion="0.00"){
+                 empresas[i].cotizacion=datos.query.results.quote[i].LastTradePriceOnly;
+             }
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
              empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime;
              empresas[i].signo=porcentaje.substring(6,7);
@@ -415,9 +434,19 @@ $scope.enviarCorreo = function (correo) {
         });
   };
     
+//    $scope.cargarDatosEmpresas = function () {
+//        $timeout(function () {
+//                    $scope.datosLista=empresas;
+//                },100);
+//    };
+    
     $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
       //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
+    };
+    
+    $scope.hide = function(){
+    $ionicLoading.hide();
     };
     
     $scope.show = function() {
@@ -431,9 +460,6 @@ $scope.enviarCorreo = function (correo) {
         showDelay: 0 
     });
     
-    $scope.hide = function(){
-    $ionicLoading.hide();
-  };
     $interval(function () {
         $scope.veces++;
           if (localStorage.graficoCargado=="true") {
@@ -446,9 +472,21 @@ $scope.enviarCorreo = function (correo) {
           }
      },50,100);
   };
+  
+    $scope.empezarIntervalo = function () {
+        $interval( function () {
+//        console.log("Interval");
+                if (sessionStorage.metodo=="actualizar") {
+                    console.log("Actualizar");
+                    sessionStorage.metodo="";
+                    $scope.cargarDatosEmpresas();
+                    localStorage.listaCargada="true";
+                }
+            } ,100);
+    };
 });
 
-var empresaTop = { sigla: 'GOOG', nombre: 'Google',cotizacion:'575',cambio:'0.38',porcentaje:'',rango:'58%',imagen:'../img/google.png',signo:''};
+var empresaTop = {};
 var empresas = [
     { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''},
     { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/yahoo.jpg',signo:''},
@@ -461,4 +499,5 @@ var empresas = [
     { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/facebook.png',signo:''},
     { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/apple.jpg',signo:''}
   ];
+  var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''}];
   localStorage.idioma='en';
