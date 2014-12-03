@@ -459,7 +459,7 @@ $scope.enviarCorreo = function (correo) {
       //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
     };
-    
+     
     $scope.hide = function(){
     $ionicLoading.hide();
     };
