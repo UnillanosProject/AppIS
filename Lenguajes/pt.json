@@ -14,5 +14,7 @@
     "program":"Eng. Sistemas",
     "tools":"Ferramentas",
     "menu":"Menu",
-    "update":"Tempo de Atualização"
+    "update":"Tempo de Atualização",
+    "retry":"Tentar Novamente",
+    "conecting":"Nenhuma Conexão de Rede"
 }

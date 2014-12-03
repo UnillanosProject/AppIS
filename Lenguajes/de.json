@@ -14,5 +14,7 @@
     "program":"Ing. Systeme",
     "tools":"Tools",
     "menu":"Menü",
-    "update":"Zeit-Aktualisierung"
+    "update":"Zeit-Aktualisierung",
+    "retry":"Wiederholen",
+    "conecting":"Keine Netzwerkverbindung"
 }

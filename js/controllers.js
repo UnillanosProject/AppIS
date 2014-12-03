@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading,$state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading,$state,$ionicPopup) {
   // Form data for the login modal
     //$scope.lenguaje="es";
     $scope.textos={};
@@ -99,12 +99,14 @@ $scope.hide = function(){
                 $scope.hide();
                 localStorage.listaCargada="false";
                 $scope.veces=0;
-                }
-                if ($scope.veces==199) {
-                $scope.hide();
+          }else{
+                if ($scope.veces==330) {
+                    $scope.hide();
+                    $scope.checkConnection();
                 //Aqui se puede poner algo que avise que no hay conexión a internet
-            } 
-     },50,200);
+                } 
+          }
+     },50,350);
   };
   
    $scope.show2 = function() {
@@ -134,16 +136,16 @@ $scope.hide = function(){
   $scope.cargar = function() {
 //      $scope.checkConnection();
       //document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
-      $scope.show2();
+      $scope.show();
       $scope.cargarDatosEmpresas();
-      $interval(function () {
-          if (localStorage.listaCargada=="true") {
-              $scope.hide();
-               //document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
-               localStorage.listaCargada="false";
-               //$scope.init();
-          }   
-     },75,200);
+//      $interval(function () {
+//          if (localStorage.listaCargada=="true") {
+//              $scope.hide();
+//               //document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
+//               localStorage.listaCargada="false";
+//               //$scope.init();
+//          }   
+//     },75,200);
   };
 //  });
 
@@ -347,6 +349,26 @@ $scope.enviarCorreo = function (correo) {
         location.href='mailto:'+correo;
     };
     
+    $scope.cargarIdioma(localStorage.idioma);
+    $scope.showPopup = function() {
+        var myPopup = $ionicPopup.show({
+          title: $scope.textos.conecting,
+          buttons: [
+                {text: $scope.textos.close,
+                    onTap: function(e) {
+
+                    }
+                },
+                {text: '<b>'+$scope.textos.retry+'</b>',
+                 type: 'button-dark',
+                    onTap: function(e) {
+                        location.reload();
+                    }
+                }
+          ]
+        });
+    };
+    
     $scope.checkConnection = function(){
         var networkState = navigator.network.connection.type;
     
@@ -360,12 +382,9 @@ $scope.enviarCorreo = function (correo) {
         states[Connection.CELL]     = 'Cell generic connection';
         states[Connection.NONE]     = 'No network connection';
         //alert(networkState);
-        alert('Connection type: ' + states[networkState]);
-        if(networkState=="none"){
-            alert('Conexión Fallida o Inestable');
-        }else{
-            alert('Conexión Exitosa');
-        }
+        //alert('Connection type: ' + states[networkState]);
+        if(networkState==="unknown" || networkState==="none")
+        $scope.showPopup();
 //        document.addEventListener ("offline", onOffline, false);
 //        function onOffline() {
 //            alert("Entre");
