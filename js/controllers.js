@@ -99,10 +99,10 @@ $scope.hide = function(){
                $scope.hide();
                localStorage.listaCargada="false";
           }
-          if ($scope.veces==320) {
-               $scope.hide();
-               alert('Conexión Fallida o Inestable\nRevisela e Intentelo de Nuevo');
-          } 
+//          if ($scope.veces==320) {
+//               $scope.hide();
+//               alert('Conexión Fallida o Inestable\nRevisela e Intentelo de Nuevo');
+//          } 
      },50,350);
   };
 //})
@@ -119,7 +119,7 @@ $scope.hide = function(){
 //  })
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
-      $scope.checkConnection();
+//      $scope.checkConnection();
       document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
       $scope.cargarDatosEmpresas();
       $interval(function () {
