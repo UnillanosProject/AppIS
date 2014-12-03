@@ -96,8 +96,8 @@ $scope.hide = function(){
     $interval(function () {
         $scope.veces++;
           if (localStorage.listaCargada=="true") {
+              localStorage.listaCargada="false";
                $scope.hide();
-               localStorage.listaCargada="false";
           }
 //          if ($scope.veces==320) {
 //               $scope.hide();
