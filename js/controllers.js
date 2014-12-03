@@ -99,7 +99,7 @@ $scope.hide = function(){
                 $scope.hide();
                 localStorage.listaCargada="false";
                 }
-                if ($scope.veces==99) {
+                if ($scope.veces==69) {
                 $scope.hide();
             } 
      },50,70);
@@ -119,11 +119,13 @@ $scope.hide = function(){
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
 //      $scope.checkConnection();
-      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+      //document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+      $scope.show();
       $scope.cargarDatosEmpresas();
       $interval(function () {
           if (localStorage.listaCargada=="true") {
-               document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
+              $scope.hide();
+               //document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
                localStorage.listaCargada="false";
                //$scope.init();
           }   
@@ -452,7 +454,7 @@ $scope.enviarCorreo = function (correo) {
     $scope.veces=0;
     $ionicLoading.show({
         //content: 'Loading',
-        templateUrl: 'templates/cargando.html',
+        templateUrl: '../templates/cargando.html',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
