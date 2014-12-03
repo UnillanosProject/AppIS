@@ -98,6 +98,7 @@ $scope.hide = function(){
           if (localStorage.listaCargada=="true") {
                 $scope.hide();
                 localStorage.listaCargada="false";
+                $scope.veces=0;
                 }
                 if ($scope.veces==199) {
                 $scope.hide();
