@@ -102,7 +102,7 @@ $scope.hide = function(){
                 $scope.yes="true";
                 //$scope.veces=0;
           }else{
-                if ($scope.veces==300 && $scope.yes=="false") {
+                if ($scope.veces==319 && $scope.yes=="false") {
                     $scope.hide();
                     $scope.checkConnection();
                 //Aqui se puede poner algo que avise que no hay conexión a internet
@@ -121,7 +121,7 @@ $scope.hide = function(){
         maxWidth: 200,
         showDelay: 0
     });
-   }
+   };
 //})
 //.controller('ControllerRefresh', function($scope, $http) {
   $scope.doRefresh = function() {
@@ -186,11 +186,13 @@ $scope.hide = function(){
     };
     
     
+    $scope.news = empresas.slice();
+    var marque;
     $scope.init = function() {
         /*$http.post('the_news_file.json', null).success(function(data) {
             if (data && data.length > 0) {*/
-                $scope.news = empresasNoticias;
-                $interval($scope.news_move ,0);
+                
+               marque = $interval($scope.news_move ,0);
         /*  }
         });*/
     };
@@ -275,7 +277,7 @@ $scope.hide = function(){
             }
             //alert(iMayor+" : "+mayor);
         }
-        empresasNoticias=empresas.slice();
+//        empresasNoticias=empresas.slice();
         //alert("Dentro de YQL");
 //        $scope.horaCarga=datos.query.created;
             //alert($scope.empresaTop.nombre);
@@ -284,10 +286,11 @@ $scope.hide = function(){
 //            sessionStorage.setItem("datosLista",empresas);
 //            alert(sessionStorage.datosLista[0].nombre);
             sessionStorage.metodo="actualizar";
+            $scope.news=empresas.slice();
+            $interval.cancel(marque);
             $timeout(function () {
                     $scope.empresaTop=empresas[iMayor];
                     //$scope.datosLista=empresas;
-                    $scope.empresasNoticias=empresasNoticias;
                     $scope.horaCarga=datos.query.created;
                     //alert($scope.horaCarga);
                     //$rootScope.$broadcast('actualizarLista');
@@ -376,7 +379,10 @@ $scope.enviarCorreo = function (correo) {
                 {text: '<b>'+$scope.textos.retry+'</b>',
                  type: 'button-dark',
                     onTap: function(e) {
-                        location.reload();
+//                         location.reload();
+                        //$scope.checkConnection();
+                        $scope.show();
+                        $scope.cargarDatosEmpresas();
                     }
                 }
           ]
@@ -397,8 +403,10 @@ $scope.enviarCorreo = function (correo) {
         states[Connection.NONE]     = 'No network connection';
         //alert(networkState);
         //alert('Connection type: ' + states[networkState]);
-        if(networkState==="unknown" || networkState==="none"){
-            $scope.showPopup();
+//        if(networkState==="unknown" || networkState==="none"){
+           if (states[networkState]=="Unknown connection"||states[networkState]=="No network connection") {
+//            alert("No hay internet");
+        $scope.showPopup();
         }else{
             $scope.showAlert();
         }
