@@ -547,16 +547,16 @@ $scope.enviarCorreo = function (correo) {
 
 var empresaTop = {};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''},
-    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/yahoo.jpg',signo:''},
-    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/microsoft.png',signo:''},
-    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/oracle.jpg',signo:''},
-    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/twitter.jpg',signo:''},
-    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/cisco.jpg',signo:''},
-    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/adobe.png',signo:''},
-    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/ibm.jpg',signo:''},
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/facebook.png',signo:''},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/apple.jpg',signo:''}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/yahoo.jpg',signo:''},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/microsoft.png',signo:''},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/oracle.jpg',signo:''},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/twitter.jpg',signo:''},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/cisco.jpg',signo:''},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/adobe.png',signo:''},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/ibm.jpg',signo:''},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/facebook.png',signo:''},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/apple.jpg',signo:''}
   ];
-  var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''}];
+  var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''}];
   localStorage.idioma='en';
