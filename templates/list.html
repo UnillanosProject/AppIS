@@ -49,7 +49,7 @@
       <p>
           <b style="font-size: 1.4em">{{empresa.cotizacion}}&nbsp;&nbsp;</b><b ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 0.9em">{{empresa.cambio}} ({{empresa.porcentaje}}%)&nbsp;&nbsp;</b><b class="textoLista"> [{{empresa.rango}}]</b> 
       </p>
-        <button ng-click="show();actualizarGrafico('{{empresa.sigla}}','{{empresa.nombre}}');" class="button button-dark bajarBoton" style="margin-top:12px">
+        <button ng-click="show();actualizarGrafico('{{empresa.sigla}}','{{empresa.nombre}}');" class="button button-clear bajarBoton" style="margin-top:12px">
         <i class="icon ion-stats-bars"></i>
         </button>
     </div>

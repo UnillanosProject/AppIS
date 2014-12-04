@@ -499,6 +499,15 @@ $scope.enviarCorreo = function (correo) {
 //                },100);
 //    };
     
+      $scope.tendencia = function() {
+          //alert('entre: '+empresa.signo);
+          if(empresa.signo=="-"){
+              document.getElementById('boton').className="icon ion-arrow-graph-down-right";
+          }else{
+              document.getElementById('boton').className="icon ion-arrow-graph-up-right";
+          }
+  };
+    
     $scope.actualizarGrafico = function (empresa,nombreEmpresa) {
       //alert(empresa);
         window.parent.cambiarGrafico(empresa,nombreEmpresa);
