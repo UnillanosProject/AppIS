@@ -14,5 +14,8 @@
     "program":"Ing. Sistemas",
     "tools":"Herramientas",
     "menu":"Menu",
-    "update":"Hora de Actualización"
+    "update":"Hora de Actualización",
+    "retry":"Retry",
+    "conecting":"Sin Conexión a Internet",
+    "conecting2":"Conexión Inestable\nIntente más Tarde"
 }

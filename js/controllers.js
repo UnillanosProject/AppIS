@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading,$state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$interval,$http,$templateCache,$ionicLoading,$state,$ionicPopup) {
   // Form data for the login modal
     //$scope.lenguaje="es";
     $scope.textos={};
@@ -84,6 +84,7 @@ $scope.hide = function(){
   };
   $scope.show = function() {
       $scope.veces=0;
+      $scope.yes="false";
     $ionicLoading.show({
         //content: 'Loading',
         templateUrl: 'templates/cargando.html',
@@ -98,11 +99,20 @@ $scope.hide = function(){
           if (localStorage.listaCargada=="true") {
                $scope.hide();
                localStorage.listaCargada="false";
+               $scope.yes="true";
+                    //$scope.checkConnection();
+                    //alert('entre 1');
+               //var estado = navigator.network.connection.type;
+               //alert(estado);
+          }else{
+              if ($scope.veces==350 && $scope.yes=="false") {
+                  $scope.hide();
+                  $scope.checkConnection();
+                  //alert('entre 2');
+                  //$scope.showPopup();
+                  //alert('Se acabo el tiempo de espera');
+              } 
           }
-          if ($scope.veces==320) {
-               $scope.hide();
-               alert('Conexión Fallida o Inestable\nRevisela e Intentelo de Nuevo');
-          } 
      },50,350);
   };
 //})
@@ -119,16 +129,18 @@ $scope.hide = function(){
 //  })
 //  .controller('BotonCtrl', function($scope) {
   $scope.cargar = function() {
-      $scope.checkConnection();
-      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
-      $scope.cargarDatosEmpresas();
-      $interval(function () {
-          if (localStorage.listaCargada=="true") {
-               document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
-               localStorage.listaCargada="false";
-               //$scope.init();
-          }   
-     },75,200);
+      //$scope.checkConnection();
+//      document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refreshing";
+//      $scope.cargarDatosEmpresas();
+//      $interval(function () {
+//          if (localStorage.listaCargada=="true") {
+//               document.getElementById('botonCargar').className="button button-icon button-energized icon ion-refresh";
+//               localStorage.listaCargada="false";
+//               //$scope.init();
+//          }   
+//     },75,200);
+        $scope.show();
+        $scope.cargarDatosEmpresas();
   };
 //  });
 
@@ -332,6 +344,41 @@ $scope.enviarCorreo = function (correo) {
         location.href='mailto:'+correo;
     };
     
+    $scope.showAlert = function() {
+         var alertPopup = $ionicPopup.alert({
+           title: $scope.textos.conecting2,
+           buttons: [
+                {text: 'OK', type: 'button-dark'}
+          ]
+         });
+         alertPopup.then(function(res) {
+           console.log('Thank you for not eating my delicious ice cream cone');
+         });
+       };
+    
+    $scope.cargarIdioma(localStorage.idioma);
+    $scope.showPopup = function() {
+        var myPopup = $ionicPopup.show({
+          title: $scope.textos.conecting,
+          buttons: [
+                {text: $scope.textos.close,
+                    onTap: function(e) {
+
+                    }
+                },
+                {text: '<b>'+$scope.textos.retry+'</b>',
+                 type: 'button-dark',
+                    onTap: function(e) {
+//                         location.reload();
+                        //$scope.checkConnection();
+                        $scope.show();
+                        $scope.cargarDatosEmpresas();
+                    }
+                }
+          ]
+        });
+    };
+    
     $scope.checkConnection = function(){
         var networkState = navigator.network.connection.type;
     
@@ -345,17 +392,18 @@ $scope.enviarCorreo = function (correo) {
         states[Connection.CELL]     = 'Cell generic connection';
         states[Connection.NONE]     = 'No network connection';
         //alert(networkState);
-        alert('Connection type: ' + states[networkState]);
-        if(networkState=="none"){
-            alert('Conexión Fallida o Inestable');
+        //alert('Connection type: ' + states[networkState]);
+        if(networkState=="none" || networkState=="unknow"){
+            $scope.showPopup();
+            //alert('Conexión Fallida o Inestable');
         }else{
-            alert('Conexión Exitosa');
+            $scope.showPopup();
+            //alert('Conexión Tipo: '+networkState);
         }
 //        document.addEventListener ("offline", onOffline, false);
 //        function onOffline() {
 //            alert("Entre");
 //        }
-        //localStorage.network=networkState;
     };
 })
         
@@ -453,7 +501,7 @@ $scope.enviarCorreo = function (correo) {
     $scope.veces=0;
     $ionicLoading.show({
         //content: 'Loading',
-        templateUrl: 'templates/cargando.html',
+        templateUrl: '../templates/cargando.html',
         animation: 'fade-in',
         showBackdrop: true,
         maxWidth: 200,
@@ -488,16 +536,16 @@ $scope.enviarCorreo = function (correo) {
 
 var empresaTop = {};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''},
-    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/yahoo.jpg',signo:''},
-    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/microsoft.png',signo:''},
-    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/oracle.jpg',signo:''},
-    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/twitter.jpg',signo:''},
-    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/cisco.jpg',signo:''},
-    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/adobe.png',signo:''},
-    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/ibm.jpg',signo:''},
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/facebook.png',signo:''},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/apple.jpg',signo:''}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/yahoo.jpg',signo:''},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/microsoft.png',signo:''},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/oracle.jpg',signo:''},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/twitter.jpg',signo:''},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/cisco.jpg',signo:''},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/adobe.png',signo:''},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/ibm.jpg',signo:''},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/facebook.png',signo:''},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/apple.jpg',signo:''}
   ];
-  var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'../img/google.png',signo:''}];
+  var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''}];
   localStorage.idioma='en';

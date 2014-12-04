@@ -14,5 +14,8 @@
     "program":"Systems Eng.",
     "tools":"Tools",
     "menu":"Menu",
-    "update":"Time Update"
+    "update":"Time Update",
+    "retry":"Retry",
+    "conecting":"No Network Connection",
+    "conecting2":"Unstable Network Connection\nTry Later"
 }
