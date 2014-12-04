@@ -84,6 +84,7 @@ $scope.hide = function(){
   };
   $scope.show = function() {
       $scope.veces=0;
+      $scope.yes="false";
     $ionicLoading.show({
         //content: 'Loading',
         templateUrl: 'templates/cargando.html',
@@ -98,15 +99,16 @@ $scope.hide = function(){
           if (localStorage.listaCargada=="true") {
                 $scope.hide();
                 localStorage.listaCargada="false";
-                $scope.veces=0;
+                $scope.yes="true";
+                //$scope.veces=0;
           }else{
-                if ($scope.veces==330) {
+                if ($scope.veces==300 && $scope.yes=="false") {
                     $scope.hide();
                     $scope.checkConnection();
                 //Aqui se puede poner algo que avise que no hay conexión a internet
                 } 
           }
-     },50,350);
+     },50,320);
   };
   
    $scope.show2 = function() {
