@@ -16,5 +16,6 @@
     "menu":"Menu",
     "update":"Time Update",
     "retry":"Retry",
-    "conecting":"No Network Connection"
+    "conecting":"No Network Connection",
+    "conecting2":"Unstable Network Connection\nTry Later"
 }

@@ -16,5 +16,6 @@
     "menu":"Menu",
     "update":"Tempo de Atualização",
     "retry":"Tentar Novamente",
-    "conecting":"Nenhuma Conexão de Rede"
+    "conecting":"Nenhuma Conexão de Rede",
+    "conecting2":"Conexão Instável\nTente mais Tarde"
 }

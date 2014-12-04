@@ -349,6 +349,18 @@ $scope.enviarCorreo = function (correo) {
         location.href='mailto:'+correo;
     };
     
+    $scope.showAlert = function() {
+         var alertPopup = $ionicPopup.alert({
+           title: $scope.textos.conecting2,
+           buttons: [
+                {text: 'OK', type: 'button-dark'}
+          ]
+         });
+         alertPopup.then(function(res) {
+           console.log('Thank you for not eating my delicious ice cream cone');
+         });
+       };
+    
     $scope.cargarIdioma(localStorage.idioma);
     $scope.showPopup = function() {
         var myPopup = $ionicPopup.show({
@@ -383,8 +395,11 @@ $scope.enviarCorreo = function (correo) {
         states[Connection.NONE]     = 'No network connection';
         //alert(networkState);
         //alert('Connection type: ' + states[networkState]);
-        if(networkState==="unknown" || networkState==="none")
-        $scope.showPopup();
+        if(networkState==="unknown" || networkState==="none"){
+            $scope.showPopup();
+        }else{
+            $scope.showAlert();
+        }
 //        document.addEventListener ("offline", onOffline, false);
 //        function onOffline() {
 //            alert("Entre");

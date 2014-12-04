@@ -16,5 +16,6 @@
     "menu":"Menü",
     "update":"Zeit-Aktualisierung",
     "retry":"Wiederholen",
-    "conecting":"Keine Netzwerkverbindung"
+    "conecting":"Keine Netzwerkverbindung",
+    "conecting2":"Instabile Verbindung\nVersuchen Sie es Später"
 }

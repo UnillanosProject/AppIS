@@ -16,5 +16,6 @@
     "menu":"Menu",
     "update":"Hora de Actualización",
     "retry":"Retry",
-    "conecting":"Sin Conexion a Internet"
+    "conecting":"Sin Conexión a Internet",
+    "conecting2":"Conexión Inestable\nIntente más Tarde"
 }
