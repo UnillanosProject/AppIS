@@ -561,6 +561,19 @@ $scope.enviarCorreo = function (correo) {
   $scope.slideChanged = function(index) {
     $scope.slideIndex = index;
   };
+})
+.controller('PredictionCtrl', function($scope) {
+  $scope.playlists = [
+    { title: 'Reggae', id: 1 },
+    { title: 'Chill', id: 2 },
+    { title: 'Dubstep', id: 3 },
+    { title: 'Indie', id: 4 },
+    { title: 'Rap', id: 5 },
+    { title: 'Cowbell', id: 6 }
+  ];
+})
+
+.controller('ViabilityCtrl', function($scope, $stateParams) {
 });
 
 var empresaTop = {};
@@ -578,3 +591,4 @@ var empresas = [
   ];
   var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''}];
   localStorage.idioma='en';
+

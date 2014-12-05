@@ -29,23 +29,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       templateUrl: "templates/menu.html",
       controller: 'AppCtrl'
     })
-
-    .state('app.prediction', {
-      url: "/prediction",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/prediction.html"
-        }
-      }
-    })
-    .state('app.viability', {
-      url: "/viability",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/viability.html"
-        }
-      }
-    })
     .state('app.language', {
       url: "/language",
       views: {
@@ -86,10 +69,29 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           templateUrl: "templates/Grafica.html"
         }
       }
+    })
+    
+    .state('app.prediction', {
+      url: "/prediction",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/prediction.html",
+          controller: 'PredictionCtrl'
+        }
+      }
+    })
+
+    .state('app.single', {
+      url: "/prediction/:playlistId",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/viability.html",
+          controller: 'ViabilityCtrl'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/principal');
-  
 });
 
 

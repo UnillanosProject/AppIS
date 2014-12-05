@@ -4,24 +4,29 @@
     <div class="h1 title"></div>
     <a class="button button-icon icon ion-home" href="#" ng-click="irAPag('app.principal')"></a>
   </ion-nav-buttons>
+<!--      <ion-content class="has-header">
+            <ion-list>
+              <ion-item ng-repeat="playlist in playlists" href="#/app/prediction/{{playlist.id}}">
+                {{playlist.title}}
+              </ion-item>
+            </ion-list>
+     </ion-content>-->
   <ion-content class="has-header" ng-controller="ListCtrl" ng-init="cargarIdioma();">
-      <div class="list card">
-          <div ng-repeat="empresa in datosLista | orderBy:'-porcentaje'" class="item item-avatar item-button-right" style="padding-bottom:5px">
-                <img class="" src="{{empresa.imagen}}">
+      <!--<div class="list card">-->
+          <ion-item ng-repeat="empresa in datosLista | orderBy:'-porcentaje'" href="#/app/prediction/{{playlist.id}}">
+            <div class="item item-avatar item-button-right" style="padding-bottom:5px">  
+              <img class="" src="{{empresa.imagen}}">
                 <h2>{{empresa.nombre}}</h2>
                 <p>
                     <b style="font-size: 0.9em">({{empresa.sigla}})</b>  
                 </p>
-                  <!--<button ng-click="" class="button" style="margin-top:12px;margin-right: 48px">-->
-                  <a class="button button-clear button-positive" style="margin-top:12px">
-                      <b ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 1.1em">{{empresa.porcentaje}}%
+                  <a class="button button-clear button-positive">
+                      <b ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 1.4em">{{empresa.porcentaje}}%
                           <i id="boton" ng-class="{'icon ion-arrow-graph-down-right':empresa.signo=='-','icon ion-arrow-graph-up-right':empresa.signo=='+'}"></i>
                       </b>  
                   </a>
-<!--                  <button ng-click="" class="button button-dark" style="margin-top:12px"> 
-                      <i class="icon ion-arrow-graph-up-right"></i>
-                  </button>-->
-          </div>
-     </div>
+            </div>
+          </ion-item>
+     <!--</div>-->
   </ion-content>
 </ion-view>
