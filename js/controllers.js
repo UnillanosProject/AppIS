@@ -187,7 +187,7 @@ $scope.hide = function(){
          } ,300);        
     };
     
-    $scope.news = empresas.slice();
+    //$scope.news = empresas.slice(); Conflicto con Conexion
     $scope.init = function() {
         /*$http.post('the_news_file.json', null).success(function(data) {
             if (data && data.length > 0) {*/
