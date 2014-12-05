@@ -28,7 +28,9 @@ angular.module('starter.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  
+  $scope.irAInstrucciones = function(){
+    $state.go('app.instruction');
+  };
   
 //  $ionicModal.fromTemplateUrl('templates/prediction.html', {
 //    scope: $scope
@@ -102,8 +104,8 @@ $scope.hide = function(){
                $scope.yes="true";
                     //$scope.checkConnection();
                     //alert('entre 1');
-               //var estado = navigator.network.connection.type;
-               //alert(estado);
+               var estado = navigator.network.connection.type;
+               alert(estado);
           }else{
               if ($scope.veces==350 && $scope.yes=="false") {
                   $scope.hide();
@@ -177,13 +179,19 @@ $scope.hide = function(){
         news_margin: 20,
         news_move_flag: true
     };
+    $scope.marque;
+    $scope.cambiarMarque = function(){
+        //alert('entre');
+        $timeout( function () {
+            $interval.cancel($scope.marque);
+         } ,300);        
+    };
     
-    
+    $scope.news = empresas.slice();
     $scope.init = function() {
         /*$http.post('the_news_file.json', null).success(function(data) {
             if (data && data.length > 0) {*/
-                $scope.news = empresasNoticias;
-                $interval($scope.news_move ,0);
+                $scope.marque = $interval($scope.news_move ,0);
         /*  }
         });*/
     };
@@ -268,7 +276,7 @@ $scope.hide = function(){
             }
             //alert(iMayor+" : "+mayor);
         }
-        empresasNoticias=empresas.slice();
+        //empresasNoticias=empresas.slice();
         //alert("Dentro de YQL");
 //        $scope.horaCarga=datos.query.created;
             //alert($scope.empresaTop.nombre);
@@ -277,10 +285,12 @@ $scope.hide = function(){
 //            sessionStorage.setItem("datosLista",empresas);
 //            alert(sessionStorage.datosLista[0].nombre);
             sessionStorage.metodo="actualizar";
+            $scope.news=empresas.slice();
+            $interval.cancel($scope.marque);
             $timeout(function () {
                     $scope.empresaTop=empresas[iMayor];
                     //$scope.datosLista=empresas;
-                    $scope.empresasNoticias=empresasNoticias;
+                    //$scope.empresasNoticias=empresasNoticias;
                     $scope.horaCarga=datos.query.created;
                     //alert($scope.horaCarga);
                     //$rootScope.$broadcast('actualizarLista');
@@ -532,6 +542,25 @@ $scope.enviarCorreo = function (correo) {
                 }
             } ,100);
     };
+})
+
+.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
+ 
+  // Called to navigate to the main app
+  $scope.startApp = function() {
+    $state.go('app.principal');
+  };
+  $scope.next = function() {
+    $ionicSlideBoxDelegate.next();
+  };
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
+
+  // Called each time the slide changes
+  $scope.slideChanged = function(index) {
+    $scope.slideIndex = index;
+  };
 });
 
 var empresaTop = {};
