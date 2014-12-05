@@ -12,21 +12,21 @@
             </ion-list>
      </ion-content>-->
   <ion-content class="has-header" ng-controller="ListCtrl" ng-init="cargarIdioma();">
-      <!--<div class="list card">-->
-          <ion-item ng-repeat="empresa in datosLista | orderBy:'-porcentaje'" href="#/app/prediction/{{playlist.id}}">
-            <div class="item item-avatar item-button-right" style="padding-bottom:5px">  
-              <img class="" src="{{empresa.imagen}}">
+      <div class="list item-avatar">
+          <ion-item ng-repeat="empresa in datosLista | orderBy:'-porcentaje'" class="item card" href="#/app/prediction/{{playlist.id}}" style="padding-bottom:5px">
+                <img class="" src="{{empresa.imagen}}">
                 <h2>{{empresa.nombre}}</h2>
                 <p>
                     <b style="font-size: 0.9em">({{empresa.sigla}})</b>  
                 </p>
+          </ion-item>
+<!--          <button ng-click="" class="button button-clear" style="margin-top:10px">
                   <a class="button button-clear button-positive">
                       <b ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 1.4em">{{empresa.porcentaje}}%
                           <i id="boton" ng-class="{'icon ion-arrow-graph-down-right':empresa.signo=='-','icon ion-arrow-graph-up-right':empresa.signo=='+'}"></i>
                       </b>  
                   </a>
-            </div>
-          </ion-item>
-     <!--</div>-->
+          </button>-->
+     </div>
   </ion-content>
 </ion-view>
