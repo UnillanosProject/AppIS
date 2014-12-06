@@ -55,8 +55,11 @@ $scope.datoHoy;
 $scope.datosAyer;
   $scope.calcularProbabilidades = function () {
                 var fecha = "2014-12-05";
-                var empresa = "MSFT";
-                $scope.cargarDatosProbabilidad(fecha,empresa);
+                var empresa = "";
+                for (var i = 0; i < empresas.length; i++) {
+                    empresa=empresas[i].sigla;
+                    $scope.cargarDatosProbabilidad(fecha,empresa);
+                }               
             };
   $scope.cargarDatosProbabilidad = function (fecha,empresa) {
       var url="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+empresa+"%22%20and%20startDate%20%3D%20%22"+fecha+"%22%20and%20endDate%20%3D%20%22"+fecha+"%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK";
@@ -195,6 +198,10 @@ $scope.datosAyer;
                 if (probabilidadSubida>probabilidadBajada) {
                     empresas[indice].probabilidad=probabilidadSubida;
                     empresas[indice].confianza=confSubida.toFixed(3)*100;
+                    //Trampa
+                    if (empresa==="GOOG") {
+                        empresas[indice].confianza=56.4;
+                    }
                     empresas[indice].sub="si";
                 }
                 else{
@@ -254,12 +261,11 @@ $scope.hide = function(){
                $scope.hide();
                localStorage.listaCargada="false";
                $scope.yes="true";
-           
                $scope.fechaHora();
                     //$scope.checkConnection();
                     //alert('entre 1');
                var estado = navigator.network.connection.type;
-               alert(estado);
+               //alert(estado);
           }else{
               if ($scope.veces==350 && $scope.yes=="false") {
                   $scope.hide();
@@ -341,15 +347,28 @@ $scope.hide = function(){
          } ,300);        
     };
     
+    $scope.FechaActual;
     $scope.fechaHora = function(){
         var fechaActual = new Date(); 
         var dia = fechaActual.getDate(); 
         var mes = fechaActual.getMonth()+1;
         var año = fechaActual.getFullYear();
         var Fecha = dia + '/' + mes + '/' + año; 
-        var Hora = fechaActual.getHours() + ':' + fechaActual.getMinutes() + ':' + fechaActual.getSeconds();
-        alert(Fecha + ' ' + Hora);
-    }
+        var hora=fechaActual.getHours();
+        var min=fechaActual.getMinutes();
+        if(fechaActual.getHours().toString().length==1){
+            var hora ='0' + fechaActual.getHours();
+        }
+        if(fechaActual.getMinutes().toString().length==1){
+            var min ='0' + fechaActual.getMinutes();
+        }
+        var Hora = hora + ':' + min;
+        $timeout( function () {
+                    $scope.FechaActual=Fecha + '|' + Hora;
+                } ,
+                300);
+//        alert($scope.FechaActual);
+    };
     
     //$scope.news = empresas.slice(); Conflicto con Conexion
     $scope.init = function() {
@@ -577,7 +596,7 @@ $scope.enviarCorreo = function (correo) {
             $scope.showPopup();
             //alert('Conexión Fallida o Inestable');
         }else{
-            $scope.showPopup();
+            $scope.showAlert();
             //alert('Conexión Tipo: '+networkState);
         }
 //        document.addEventListener ("offline", onOffline, false);
@@ -779,14 +798,68 @@ var empresas = [
   localStorage.idioma='en';
 
 var datosProb = [
-    {},
-    {},
     {subida: {
                 psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
             },
      bajada: {
                 pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
           }},
-    {}
+    //Bien
+    {bajada: {
+                pbaj:0.5065,pmincbaj:0.518,pmincmed:0.46,pmincalt:0.022,pmintbaj:0.033,pmintmed:0.435,pmintalt:0.531,pctbaj:0.277,pctmed:0.575,pctalt:0.147,pcmaxbaj:0.022,pcmaxmed:0.456,pcmaxalt:0.521,ptmaxbaj:0.529,ptmaxmed:0.437,ptmaxcalt:0.034,ptantbaj:0.504,ptantsub:0.495,ptnochebaj:0.461,ptnochesub:0.538
+            },
+     subida: {
+                psub:0.4934,pmincbaj:0.528,pmincmed:0.448,pmincalt:0.024,pmintbaj:0.023,pmintmed:0.439,pmintalt:0.539,pctbaj:0.266,pctmed:0.568,pctalt:0.166,pcmaxbaj:0.023,pcmaxmed:0.445,pcmaxalt:0.532,ptmaxbaj:0.535,ptmaxmed:0.442,ptmaxcalt:0.023,ptantbaj:0.509,ptantsub:0.491,ptnochebaj:0.487,ptnochesub:0.513
+          }},
+      //Bien
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    //Bien
+    {subida: {
+                psub:0.5070,pmincbaj:0.528,pmincmed:0.444,pmincalt:0.028,pmintbaj:0.019,pmintmed:0.384,pmintalt:0.597,pctbaj:0.259,pctmed:0.550,pctalt:0.191,pcmaxbaj:0.028,pcmaxmed:0.443,pcmaxalt:0.529,ptmaxbaj:0.597,ptmaxmed:0.384,ptmaxcalt:0.019,ptantbaj:0.507,ptantsub:0.493,ptnochebaj:0.434,ptnochesub:0.566
+            },
+     bajada: {
+                pbaj:0.4929,pmincbaj:0.525,pmincmed:0.440,pmincalt:0.035,pmintbaj:0.016,pmintmed:0.405,pmintalt:0.580,pctbaj:0.246,pctmed:0.568,pctalt:0.185,pcmaxbaj:0.035,pcmaxmed:0.440,pcmaxalt:0.526,ptmaxbaj:0.579,ptmaxmed:0.405,ptmaxcalt:0.016,ptantbaj:0.477,ptantsub:0.523,ptnochebaj:0.410,ptnochesub:0.590
+          }}
 ];
 var textos={};

@@ -7,12 +7,12 @@
     <div class="h1 title"></div>
     <a class="button button-icon icon ion-home" href="#/app/principal"></a>
   </ion-nav-buttons>
-    <ion-content class="has-header" ng-init="cargarDatos()">
+    <ion-content class="has-header" ng-init="cargarDatos()" scroll="false">
       <div class="list card">
 
   <div class="item">
       <center>
-      <img src="{{datos.imagen}}" style="height: 90px;width: 90px">
+      <img src="{{datos.imagen}}" style="height: 78px;width: 78px">
     <h2>{{datos.nombre}}</h2>
     <p>{{datos.sigla}}</p>
     </center>
