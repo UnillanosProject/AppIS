@@ -11,17 +11,17 @@
               </ion-item>  
             </ion-list>
      </ion-content>-->
-  <ion-content class="has-header" ng-controller="ListCtrl" ng-init="cargarIdioma();">
+  <ion-content class="has-header" ng-controller="ListCtrl" ng-init="cargarIdioma();calcularProbabilidades();">
       <div class="list card">
-          <a ng-repeat="empresa in datosLista | orderBy:'-porcentaje'" class="item item-avatar item-button-right" href="#/app/prediction/{{playlist.id}}" style="padding-bottom:5px">
+          <a ng-repeat="empresa in datosLista | orderBy:'-confianza'" class="item item-avatar item-button-right" href="#/app/viability/{{empresa.sigla}}" style="padding-bottom:5px">
                 <img class="" src="{{empresa.imagen}}">
                 <h2>{{empresa.nombre}}</h2>
                 <p><b style="font-size: 0.9em">({{empresa.sigla}})</b></p>
-            <button ng-click="" class="button button-clear" style="margin-top:10px">
-                  <b ng-class="{'assertive':empresa.signo=='-','balanced':empresa.signo=='+'}" style="font-size: 1.4em">{{empresa.porcentaje}}%
-                          <i id="boton" ng-class="{'icon ion-arrow-graph-down-right':empresa.signo=='-','icon ion-arrow-graph-up-right':empresa.signo=='+'}"></i>
+            <div ng-click="" class="button button-clear" style="margin-top:10px">
+                  <b ng-class="{'assertive':empresa.sub=='no','balanced':empresa.sub=='si'}" style="font-size: 1.4em">{{empresa.confianza}}%
+                          <i id="boton" ng-class="{'icon ion-arrow-graph-down-right':empresa.sub=='no','icon ion-arrow-graph-up-right':empresa.sub=='si'}"></i>
                   </b>  
-            </button>
+            </div>
           </a>
      </div>
   </ion-content>

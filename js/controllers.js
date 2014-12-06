@@ -12,6 +12,7 @@ angular.module('starter.controllers', [])
             //alert(data.login);
             //$scope.textos.login=data.login;
             $scope.textos=data;
+            textos=$scope.textos;
             localStorage.idioma=lenguaje;
             //alert("Text :"+$scope.textos.login);
         }); 
@@ -50,8 +51,159 @@ angular.module('starter.controllers', [])
 //        showDelay: 0
 //    });
 //  };
+$scope.datoHoy;
+$scope.datosAyer;
+  $scope.calcularProbabilidades = function () {
+                var fecha = "2014-12-05";
+                var empresa = "MSFT";
+                $scope.cargarDatosProbabilidad(fecha,empresa);
+            };
+  $scope.cargarDatosProbabilidad = function (fecha,empresa) {
+      var url="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20%3D%20%22"+empresa+"%22%20and%20startDate%20%3D%20%22"+fecha+"%22%20and%20endDate%20%3D%20%22"+fecha+"%22&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=JSON_CALLBACK";
+      $http.jsonp(url)
+        .success(function (data) {
+            $scope.yqlcallbackprobabilidad(data,empresa);          
+        });
+  };
   
-  
+  $scope.yqlcallbackprobabilidad = function (datos,empresa) {
+        var aperturaAnt=datos.query.results.quote.Open;
+        var maximoAnt=datos.query.results.quote.High;
+        var minimoAnt=datos.query.results.quote.Low;
+        var cierreAnt=datos.query.results.quote.Close;
+        
+        var aperturaAct = empresas[2].abrio;
+        console.log("Datos Act: "+aperturaAnt+","+maximoAnt+","+minimoAnt+","+cierreAnt+","+aperturaAct);
+        
+        var indice;
+                for (i = 0; i < empresas.length; i++) {
+                    if (empresa===empresas[i].sigla) {
+                        indice=i;
+                    }
+                }
+        console.log("Indice:"+indice);
+        var datProbBaj = datosProb[indice].bajada;
+        var datProbSub = datosProb[indice].subida;
+        var porA = 25;var porB =75;
+        var total = maximoAnt - minimoAnt;
+        var mincbaj,mintbaj,ctbaj,cmaxbaj,tmaxbaj,tendAntbaj,tendNochebaj,mincsub,mintsub,ctsub,cmaxsub,tmaxsub,tendAntsub,tendNochesub;
+        var menor;var mayor;
+        
+                if (aperturaAnt<cierreAnt) {
+                    menor=aperturaAnt;mayor=cierreAnt;
+                    tendAntbaj = datProbBaj.ptantsub;
+                    tendAntsub = datProbSub.ptantsub;
+                }
+                else{
+                    menor=cierreAnt;mayor=aperturaAnt;
+                    tendAntbaj = datProbBaj.ptantbaj;
+                    tendAntsub = datProbSub.ptantbaj;
+                }
+        console.log("TendAntBaj:"+tendAntbaj+" TendAntSub;"+tendAntsub);
+                if (aperturaAct>cierreAnt) {
+                    tendNochebaj = datProbBaj.ptnochesub;
+                    tendNochesub = datProbSub.ptnochesub;
+                }
+                else{
+                    tendNochebaj = datProbBaj.ptnochebaj;
+                    tendNochesub = datProbSub.ptnochebaj;
+                }
+        console.log("TendNocheBaj:"+tendNochebaj+" TendAntSub;"+tendNochesub);
+                if (((menor-minimoAnt)*100/total)<porA) {
+                    mincbaj=datProbBaj.pmincbaj;
+                    mincsub=datProbSub.pmincbaj;
+                }
+                else {
+                    if (((menor-minimoAnt)*100/total)<porB) {
+                     mincbaj=datProbBaj.pmincmed;
+                    mincsub=datProbSub.pmincmed;
+                }
+                else {
+                     mincbaj=datProbBaj.pmincalt;
+                    mincsub=datProbSub.pmincalt;
+                }
+                }
+         console.log("MinCBaj:"+mincbaj+" MinCSub;"+mincsub);       
+                if (((mayor-minimoAnt)*100/total)<porA) {
+                     mintbaj=datProbBaj.pmintbaj;
+                    mintsub=datProbSub.pmintbaj;
+                }
+                else {
+                    if (((mayor-minimoAnt)*100/total)<porB) {
+                    mintbaj=datProbBaj.pmintmed;
+                    mintsub=datProbSub.pmintmed;
+                }
+                else {
+                    mintbaj=datProbBaj.pmintalt;
+                    mintsub=datProbSub.pmintalt;
+                }
+                }
+        console.log("MinTBaj:"+mintbaj+" MinTSub;"+mintsub);        
+                if (((mayor-menor)*100/total)<porA) {
+                    ctbaj=datProbBaj.pctbaj;
+                    ctsub=datProbSub.pctbaj;
+                }
+                else {
+                    if (((mayor-menor)*100/total)<porB) {
+                    ctbaj=datProbBaj.pctmed;
+                    ctsub=datProbSub.pctmed;
+                }
+                else {
+                    ctbaj=datProbBaj.pctalt;
+                    ctsub=datProbSub.pctalt;
+                }
+                }
+         console.log("CTBaj:"+ctbaj+" CTSub;"+ctsub);       
+                if (((maximoAnt-menor)*100/total)<porA) {
+                    cmaxbaj=datProbBaj.pcmaxbaj;
+                    cmaxsub=datProbSub.pcmaxbaj;
+                }
+                else {
+                    if (((maximoAnt-menor)*100/total)<porB) {
+                    cmaxbaj=datProbBaj.pcmaxmed;
+                    cmaxsub=datProbSub.pcmaxmed;
+                }
+                else {
+                    cmaxbaj=datProbBaj.pcmaxalt;
+                    cmaxsub=datProbSub.pcmaxalt;
+                }
+                }
+         console.log("CmaxBaj:"+cmaxbaj+" CmaxSub;"+cmaxsub);       
+                if (((maximoAnt-mayor)*100/total)<porA) {
+                    tmaxbaj=datProbBaj.ptmaxbaj;
+                    tmaxsub=datProbSub.ptmaxbaj;
+                }
+                else {
+                    if (((maximoAnt-mayor)*100/total)<porB) {
+                    tmaxbaj=datProbBaj.ptmaxmed;
+                    tmaxsub=datProbSub.ptmaxmed;
+                }
+                else {
+                    tmaxbaj=datProbBaj.ptmaxalt;
+                    tmaxsub=datProbSub.ptmaxalt;
+                }
+                }
+        console.log("TmaxBaj:"+tmaxbaj+" TmaxSub;"+tmaxsub);
+        console.log("ProbSub:"+datProbSub.psub+" ProbBaj:"+datProbBaj.pbaj);
+        var probabilidadSubida = datProbSub.psub*mincsub*mintsub*ctsub*cmaxsub*tmaxsub*tendAntsub*tendNochesub;
+        var probabilidadBajada = datProbBaj.pbaj*mincbaj*mintbaj*ctbaj*cmaxbaj*tmaxbaj*tendAntbaj*tendNochebaj;
+        var confSubida = probabilidadSubida/(probabilidadSubida + probabilidadBajada);
+        var confBajada = probabilidadBajada/(probabilidadSubida + probabilidadBajada);
+        
+        console.log("PS:"+probabilidadSubida+" Conf:"+confSubida+"\nPB:"+probabilidadBajada+" Conf:"+confBajada);
+        
+                if (probabilidadSubida>probabilidadBajada) {
+                    empresas[indice].probabilidad=probabilidadSubida;
+                    empresas[indice].confianza=confSubida.toFixed(3)*100;
+                    empresas[indice].sub="si";
+                }
+                else{
+                    empresas[indice].probabilidad=probabilidadBajada;
+                    empresas[indice].confianza=confBajada.toFixed(3)*100;
+                    empresas[indice].sub="no";
+                }
+        
+    };
   $scope.guardarPrincipal = function () {
           localStorage.setItem('principal',$scope);  
       };
@@ -105,7 +257,7 @@ $scope.hide = function(){
                     //$scope.checkConnection();
                     //alert('entre 1');
                var estado = navigator.network.connection.type;
-               alert(estado);
+//               alert(estado);
           }else{
               if ($scope.veces==350 && $scope.yes=="false") {
                   $scope.hide();
@@ -191,6 +343,7 @@ $scope.hide = function(){
     $scope.init = function() {
         /*$http.post('the_news_file.json', null).success(function(data) {
             if (data && data.length > 0) {*/
+                $scope.news = empresas.slice();
                 $scope.marque = $interval($scope.news_move ,0);
         /*  }
         });*/
@@ -252,6 +405,11 @@ $scope.hide = function(){
              var porcentaje = datos.query.results.quote[i].ChangePercentRealtime;
              empresas[i].cambio=datos.query.results.quote[i].ChangeRealtime;
              empresas[i].signo=porcentaje.substring(6,7);
+             empresas[i].abrio=parseFloat(datos.query.results.quote[i].Open);
+             empresas[i].ask=datos.query.results.quote[i].Ask;
+             empresas[i].bid=datos.query.results.quote[i].Bid;
+             empresas[i].prevClose=datos.query.results.quote[i].PreviousClose;
+             empresas[i].volume=datos.query.results.quote[i].Volume;
              //alert(porcentaje.substring(7,11));
                     if (empresas[i].signo=="+") {
                         empresas[i].porcentaje=parseFloat(porcentaje.substring(7,11));
@@ -566,22 +724,57 @@ $scope.enviarCorreo = function (correo) {
 
 })
 
-.controller('ViabilityCtrl', function($scope, $stateParams) {
+.controller('ViabilityCtrl', function($scope, $stateParams,$state,$timeout) {
+//    alert($stateParams.sigla);
+    $scope.datos = {};
+    $scope.prediccion = "";
+    $scope.cargarDatos = function () {
+                for (var i = 0; i < empresas.length; i++) {
+                    if ($stateParams.sigla===empresas[i].sigla) {
+                        $scope.datos=empresas[i];
+                    }
+                }
+                if ($scope.datos.sub==="si") {
+                    $scope.prediccion="Will be rise";
+                }
+                else{
+                    $scope.prediccion="Will be lower";
+                }
+                $timeout( function () {
+//                    alert($scope.datos.nombre);
+                } ,100);
+                
+    };    
+    $scope.previous = function() {
+    $state.go("app.prediction");
+  };
 });
 
 var empresaTop = {};
 var empresas = [
-    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''},
-    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/yahoo.jpg',signo:''},
-    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/microsoft.png',signo:''},
-    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/oracle.jpg',signo:''},
-    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/twitter.jpg',signo:''},
-    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/cisco.jpg',signo:''},
-    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/adobe.png',signo:''},
-    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/ibm.jpg',signo:''},
-    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/facebook.png',signo:''},
-    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/apple.jpg',signo:''}
+    { sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'YHOO', nombre: 'Yahoo Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/yahoo.jpg',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'MSFT', nombre: 'Microsoft Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/microsoft.png',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'ORCL', nombre: 'Oracle Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/oracle.jpg',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'TWTR', nombre: 'Twitter Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/twitter.jpg',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'CSCO', nombre: 'Cisco Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/cisco.jpg',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'ADBE', nombre: 'Adobe Systems',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/adobe.png',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'IBM', nombre: 'IBM Corp.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/ibm.jpg',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'FB', nombre: 'Facebook Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/facebook.png',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""},
+    { sigla: 'AAPL', nombre: 'Apple Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/apple.jpg',signo:'',probabilidad:0,confianza:0,abrio:"",ask:"",bid:"",prevClose:"",sub:"",volume:""}
   ];
   var empresasNoticias = [{ sigla: 'GOOG', nombre: 'Google Inc.',cotizacion:'',cambio:'',porcentaje:0,rango:'',imagen:'img/google.png',signo:''}];
   localStorage.idioma='en';
 
+var datosProb = [
+    {},
+    {},
+    {subida: {
+                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+            },
+     bajada: {
+                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+          }},
+    {}
+];
+var textos={};

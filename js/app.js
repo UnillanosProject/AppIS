@@ -81,8 +81,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-    .state('app.single', {
-      url: "/prediction/:playlistId",
+    .state('app.viability', {
+      url: "/viability/:sigla",
       views: {
         'menuContent' :{
           templateUrl: "templates/viability.html",

@@ -1,9 +1,88 @@
 <ion-view title={{textos.viability}}>
   <ion-nav-buttons>
+      <button class="button button-positive button-icon no-animation ion-ios7-arrow-back"
+                  ng-click="previous()">
+    </button>
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     <div class="h1 title"></div>
     <a class="button button-icon icon ion-home" href="#/app/principal"></a>
   </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-content class="has-header" ng-init="cargarDatos()">
+      <div class="list card">
+
+  <div class="item item-avatar">
+    <img src="{{datos.imagen}}">
+    <h2>{{datos.nombre}}</h2>
+    <p>{{datos.sigla}}</p>
+  </div>
+
+  <!--<div class="item-body">-->
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item">
+        <b>Quote:</b>&nbsp;{{datos.cotizacion}}
+    </a>
+    <a class="tab-item">
+      <b>Change:</b>&nbsp;<b ng-class="{'assertive':datos.signo==='-','balanced':datos.signo==='+'}">{{datos.cambio}}({{datos.porcentaje}})</b>
+    </a>
+    </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item">
+        <b>Prev Close:</b>&nbsp;{{datos.prevClose}}
+    </a>
+    <a class="tab-item">
+      <b>Day Range:</b>&nbsp;{{datos.rango}}
+    </a>
+    </div>
+    <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item">
+      <b>Ask:&nbsp;</b>{{datos.ask}}
+    </a>
+    <a class="tab-item">
+      <b>Bid:&nbsp;</b>{{datos.bid}}
+    </a>
+    </div>
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <a class="tab-item">
+      <b>Volume:&nbsp;</b>{{datos.volume}}
+    </a>
+  </div>
+  </div>
+  <div class="list card">
+  <div class="item">
+      <center><h2 style="font-size: 1.4em">Prediction of today</h2></center>
+  </div>
+      <div class="item tabs tabs-secondary tabs-icon-left">
+        <div class="tab-item">
+           <b style="font-size: 0.9em">The Quote</b>&nbsp;<b ng-class="{'assertive':datos.sub==='no','balanced':datos.sub==='si'}" style="font-size: 1.1em">{{prediccion}}</b>
+         </div>
+      </div>
+          <div class="item item-button-right">
+            <b style="font-size: 1.2em" >{{textos.viability}}:</b>
+            <button class="button button-clear">
+                  <b ng-class="{'assertive':datos.sub=='no','balanced':datos.sub=='si'}" style="font-size: 1.4em">{{datos.confianza}}%
+                          <i id="boton" ng-class="{'icon ion-arrow-graph-down-right':datos.sub=='no','icon ion-arrow-graph-up-right':datos.sub=='si'}"></i>
+                  </b>  
+            </button>
+          </div>
+  </div>
+<!--  <div class="item item-avatar item-button-right" style="padding-bottom:5px">
+        <img class="" src="{{empresa.imagen}}">
+         <h2>{{empresa.nombre}}</h2>
+        <p><b style="font-size: 0.9em">({{empresa.sigla}})</b></p>
+            
+  </div>-->
+    <!--<img class="full-image" src="delorean.jpg">-->
+<!--    <p>
+      This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+      the content is from a card-body consisting of an image and paragraph text. The footer
+      consists of tabs, icons aligned left, within the card-footer.
+    </p>
+    <p>
+      <a href="#" class="subdued">1 Like</a>
+      <a href="#" class="subdued">5 Comments</a>
+    </p>-->
+  <!--</div>-->
+
+
   </ion-content> 
 </ion-view>
