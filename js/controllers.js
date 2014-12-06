@@ -264,7 +264,7 @@ $scope.hide = function(){
                $scope.fechaHora();
                     //$scope.checkConnection();
                     //alert('entre 1');
-               var estado = navigator.network.connection.type;
+               //var estado = navigator.network.connection.type;
                //alert(estado);
           }else{
               if ($scope.veces==350 && $scope.yes=="false") {
@@ -347,7 +347,7 @@ $scope.hide = function(){
          } ,300);        
     };
     
-    $scope.FechaActual;
+    $scope.FechaActual='1/01/2015|09:00';
     $scope.fechaHora = function(){
         var fechaActual = new Date(); 
         var dia = fechaActual.getDate(); 
