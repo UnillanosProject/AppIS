@@ -1,66 +1,55 @@
 <ion-view title={{textos.about}}>
-  <ion-nav-buttons> 
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    <div class="h1 title"></div>
-    <a class="button button-icon icon ion-home" href="#/app/principal"></a>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
-    <div class="list card">
-        <div class="item item-content" style="background: #F5F5F5">
-            <center><font size="6"><b>{{textos.developers}}</b></font></center>
-        </div>
-        <div class="item item-thumbnail-left">
-            <!--<button ng-controller="AppCrtl" ng-click="enviarCorreo()"></button>-->
-            <img src="img/arango.jpg">
-            <font size=4><b>Edison Ruben Arango</b></font>
-            <h2>{{textos.program}}</h2>
-            <!--<h3>edisonarab@gmail.com</h3>-->
-            <a ng-click="enviarCorreo('edisonarab@gmail.com')"><u>edisonarab@gmail.com</u></a>
-            <!--<button class="button button-icon" ng-click="enviarCorreo()">edisonarab@gmail.com</button>-->
-        </div>
-        <div class="item item-thumbnail-left">
-            <img src="img/castro.jpg">
-            <font size=4><b>Juan Sebastian Castro</b></font>
-            <h2>{{textos.program}}</h2>
-            <a ng-click="enviarCorreo('juanseca_94@hotmail.com')"><u>juanseca_94@hotmail.com</u></a>
-            <!--<a ng-href="mailto:edisonarab@gmail.com" style="text-decoration:none"><p>juanseca_94@hotmail.com</p></a>-->
-        </div>
-        <br>
-        <div class="item item-content" style="background: #F5F5F5">
-            <center><font size="6"><b>{{textos.tools}}</b></font></center>
-        </div>
-        <div class="item item-thumbnail-left">
-            <img src="img/yahoofinance.png">
-            <div style="margin-top:15px"><font size=4 ><b>Yahoo Finance</b></font></div>
-            <h3>(By Yahoo! Inc.)</h3>
-        </div>
-        <div class="item item-thumbnail-left">
-            <img src="img/angular.png">
-            <div style="margin-top:15px"><font size=4 ><b>Angular JS</b></font></div>
-            <h3>(By Google)</h3>
-        </div>
-        <div class="item item-thumbnail-left">
-            <img src="img/ionic.png">
-            <div style="margin-top:15px"><font size=4 ><b>Ionic Framework</b></font></div>
-            <h3>(By Drifty Co.)</h3>
-        </div>
-        <div class="item item-thumbnail-left">
-            <img src="img/phonegap.png">
-            <div style="margin-top:15px"><font size=4 ><b>PhoneGap</b></font></div>
-            <h3>(By Adobe Systems)</h3>
-        </div>
-        <div class="item item-thumbnail-left">
-            <img src="img/grafica.png">
-            <div style="margin-top:15px"><font size=4 ><b>Highcharts JS</b></font></div>
-            <h3>(By HighSoft)</h3>
-        </div>
-<!--        <div class="item item-image">
-            <img src="../img/ionic.png"> 
-        </div>
-        <a class="item item-icon-left assertive" href="#">
-            <i class="icon ion-music-note"></i>
-            Start listening
-        </a>-->
-    </div>
-  </ion-content>
+    <ion-nav-buttons> 
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        <div class="h1 title"></div>
+        <a class="button button-icon icon ion-home" href="#/app/principal"></a>
+    </ion-nav-buttons>
+    <ion-content class="has-header">
+      <div class="list card">
+          <div class="item item-content" style="background: #F5F5F5">
+              <center><font size="6"><b>{{textos.developers}}</b></font></center>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/arango.jpg">
+              <font size=4><b>Edison Ruben Arango</b></font>
+              <h2>{{textos.program}}</h2>
+              <a ng-click="enviarCorreo('edisonarab@gmail.com')"><u>edisonarab@gmail.com</u></a>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/castro.jpg">
+              <font size=4><b>Juan Sebastian Castro</b></font>
+              <h2>{{textos.program}}</h2>
+              <a ng-click="enviarCorreo('juanseca_94@hotmail.com')"><u>juanseca_94@hotmail.com</u></a>
+          </div>
+          <br>
+          <div class="item item-content" style="background: #F5F5F5">
+              <center><font size="6"><b>{{textos.tools}}</b></font></center>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/yahoofinance.png">
+              <div style="margin-top:15px"><font size=4 ><b>Yahoo Finance</b></font></div>
+              <h3>(By Yahoo! Inc.)</h3>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/angular.png">
+              <div style="margin-top:15px"><font size=4 ><b>Angular JS</b></font></div>
+              <h3>(By Google)</h3>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/ionic.png">
+              <div style="margin-top:15px"><font size=4 ><b>Ionic Framework</b></font></div>
+              <h3>(By Drifty Co.)</h3>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/phonegap.png">
+              <div style="margin-top:15px"><font size=4 ><b>PhoneGap</b></font></div>
+              <h3>(By Adobe Systems)</h3>
+          </div>
+          <div class="item item-thumbnail-left">
+              <img src="img/grafica.png">
+              <div style="margin-top:15px"><font size=4 ><b>Highcharts JS</b></font></div>
+              <h3>(By HighSoft)</h3>
+          </div>
+      </div>
+    </ion-content>
 </ion-view>

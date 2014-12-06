@@ -254,10 +254,12 @@ $scope.hide = function(){
                $scope.hide();
                localStorage.listaCargada="false";
                $scope.yes="true";
+           
+               $scope.fechaHora();
                     //$scope.checkConnection();
                     //alert('entre 1');
                var estado = navigator.network.connection.type;
-//               alert(estado);
+               alert(estado);
           }else{
               if ($scope.veces==350 && $scope.yes=="false") {
                   $scope.hide();
@@ -338,6 +340,16 @@ $scope.hide = function(){
             $interval.cancel($scope.marque);
          } ,300);        
     };
+    
+    $scope.fechaHora = function(){
+        var fechaActual = new Date(); 
+        var dia = fechaActual.getDate(); 
+        var mes = fechaActual.getMonth()+1;
+        var año = fechaActual.getFullYear();
+        var Fecha = dia + '/' + mes + '/' + año; 
+        var Hora = fechaActual.getHours() + ':' + fechaActual.getMinutes() + ':' + fechaActual.getSeconds();
+        alert(Fecha + ' ' + Hora);
+    }
     
     //$scope.news = empresas.slice(); Conflicto con Conexion
     $scope.init = function() {
@@ -680,7 +692,7 @@ $scope.enviarCorreo = function (correo) {
         $scope.veces++;
           if (localStorage.graficoCargado=="true") {
               localStorage.graficoCargado="false";
-               $scope.hide();               
+               $scope.hide();
           }
           if ($scope.veces==99) {
                //alert("Conexión Fallida, verifique su acceso a internet");

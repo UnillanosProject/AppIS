@@ -2,7 +2,7 @@
   <ion-nav-buttons> 
       <button menu-toggle="left" class="button button-icon icon ion-navicon" ng-click="cambiarMarque()"></button>
     <div class="h1 title"></div>
-    <button  id="botonCargar" ng-click="cargar();" class="button button-icon button-energized icon ion-refresh"></button>
+    <button  id="botonCargar" ng-click="cargar();fechaHora();" class="button button-icon button-energized icon ion-refresh"></button>
   </ion-nav-buttons>
 <!--    <ion-header-bar class="bar-subheader" style="height: 270px">-->
         <ion-content class="has-header" ng-init="show();cargarDatosEmpresas();">
@@ -11,7 +11,7 @@
       <div style="float: left;width: 50%!important;line-height: 0.1;">
           <!--<marquee behavior="scroll" direction="up" scrollamount="1.5" height="100%">-->
               <center>
-                  <p style="font-size: 1em;margin-top: 9px" class="dark">At:&nbsp;<b>2014-12-06</b></p><br>
+                  <p style="font-size: 1em;margin-top: 9px" class="dark">2014-12-06</p><br>
                   <!--<b>Google Inc.</b>-->
                   <p>
                       <b style="font-size: 1.1em;">Markets:</b>&nbsp;<b class="balanced" style="font-size: 0.9em;">Open</b>
