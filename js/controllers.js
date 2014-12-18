@@ -197,16 +197,14 @@ $scope.datosAyer;
         
                 if (probabilidadSubida>probabilidadBajada) {
                     empresas[indice].probabilidad=probabilidadSubida;
-                    empresas[indice].confianza=confSubida.toFixed(3)*100;
-                    //Trampa
-                    if (empresa==="GOOG") {
-                        empresas[indice].confianza=56.4;
-                    }
+                    empresas[indice].confianza=(confSubida*100).toFixed(2);
+//                    empresas[indice].confianza=confSubida.toFixed(3)*100;
                     empresas[indice].sub="si";
                 }
                 else{
                     empresas[indice].probabilidad=probabilidadBajada;
-                    empresas[indice].confianza=confBajada.toFixed(3)*100;
+                    empresas[indice].confianza=(confBajada*100).toFixed(2);
+//                    empresas[indice].confianza=confBajada.toFixed(3)*100;
                     empresas[indice].sub="no";
                 }
         
@@ -798,11 +796,12 @@ var empresas = [
   localStorage.idioma='en';
 
 var datosProb = [
+    //Pocos Datos
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.454,pmincbaj:0.465,pmincmed:0.485,pmincalt:0.04,pmintbaj:0.02,pmintmed:0.257,pmintalt:0.713,pctbaj:0.248,pctmed:0.525,pctalt:0.218,pcmaxbaj:0.04,pcmaxmed:0.485,pcmaxalt:0.465,ptmaxbaj:0.713,ptmaxmed:0.257,ptmaxcalt:0.02,ptantbaj:0.515,ptantsub:0.475,ptnochebaj:0.485,ptnochesub:0.505
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.546,pmincbaj:0.405,pmincmed:0.488,pmincalt:0.107,pmintbaj:0.001,pmintmed:0.381,pmintalt:0.619,pctbaj:0.333,pctmed:0.524,pctalt:0.143,pcmaxbaj:0.107,pcmaxmed:0.488,pcmaxalt:0.405,ptmaxbaj:0.619,ptmaxmed:0.381,ptmaxcalt:0.001,ptantbaj:0.571,ptantsub:0.429,ptnochebaj:0.345,ptnochesub:0.655
           }},
     //Bien
     {bajada: {
@@ -818,41 +817,47 @@ var datosProb = [
      bajada: {
                 pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
           }},
+      //Bien
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.5383,pmincbaj:0.506,pmincmed:0.467,pmincalt:0.027,pmintbaj:0.023,pmintmed:0.455,pmintalt:0.522,pctbaj:0.273,pctmed:0.586,pctalt:0.141,pcmaxbaj:0.027,pcmaxmed:0.464,pcmaxalt:0.509,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.447,ptantsub:0.553,ptnochebaj:0.520,ptnochesub:0.480
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.4616,pmincbaj:0.555,pmincmed:0.427,pmincalt:0.019,pmintbaj:0.030,pmintmed:0.490,pmintalt:0.480,pctbaj:0.260,pctmed:0.596,pctalt:0.144,pcmaxbaj:0.019,pcmaxmed:0.425,pcmaxalt:0.556,ptmaxbaj:0.479,ptmaxmed:0.491,ptmaxcalt:0.030,ptantbaj:0.474,ptantsub:0.526,ptnochebaj:0.529,ptnochesub:0.471
           }},
+      //Pocos Datos
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.4642,pmincbaj:0.547,pmincmed:0.427,pmincalt:0.02,pmintbaj:0.047,pmintmed:0.427,pmintalt:0.52,pctbaj:0.32,pctmed:0.507,pctalt:0.167,pcmaxbaj:0.02,pcmaxmed:0.427,pcmaxalt:0.547,ptmaxbaj:0.513,ptmaxmed:0.433,ptmaxcalt:0.047,ptantbaj:0.48,ptantsub:0.513,ptnochebaj:0.333,ptnochesub:0.666
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.5357,pmincbaj:0.546,pmincmed:0.438,pmincalt:0.015,pmintbaj:0.031,pmintmed:0.377,pmintalt:0.592,pctbaj:0.238,pctmed:0.577,pctalt:0.185,pcmaxbaj:0.015,pcmaxmed:0.438,pcmaxalt:0.546,ptmaxbaj:0.592,ptmaxmed:0.377,ptmaxcalt:0.031,ptantbaj:0.592,ptantsub:0.408,ptnochebaj:0.523,ptnochesub:0.477
           }},
+      //Bien
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.5176,pmincbaj:0.526,pmincmed:0.447,pmincalt:0.027,pmintbaj:0.021,pmintmed:0.436,pmintalt:0.544,pctbaj:0.259,pctmed:0.584,pctalt:0.158,pcmaxbaj:0.026,pcmaxmed:0.445,pcmaxalt:0.530,ptmaxbaj:0.539,ptmaxmed:0.440,ptmaxcalt:0.021,ptantbaj:0.472,ptantsub:0.528,ptnochebaj:0.480,ptnochesub:0.520
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.4823,pmincbaj:0.553,pmincmed:0.423,pmincalt:0.023,pmintbaj:0.034,pmintmed:0.480,pmintalt:0.486,pctbaj:0.282,pctmed:0.580,pctalt:0.138,pcmaxbaj:0.023,pcmaxmed:0.421,pcmaxalt:0.555,ptmaxbaj:0.484,ptmaxmed:0.482,ptmaxcalt:0.034,ptantbaj:0.492,ptantsub:0.508,ptnochebaj:0.517,ptnochesub:0.483
           }},
+      //Bien
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.5340,pmincbaj:0.505,pmincmed:0.468,pmincalt:0.027,pmintbaj:0.014,pmintmed:0.405,pmintalt:0.581,pctbaj:0.263,pctmed:0.563,pctalt:0.174,pcmaxbaj:0.026,pcmaxmed:0.467,pcmaxalt:0.507,ptmaxbaj:0.579,ptmaxmed:0.407,ptmaxcalt:0.014,ptantbaj:0.473,ptantsub:0.527,ptnochebaj:0.5,ptnochesub:0.5
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.4659,pmincbaj:0.518,pmincmed:0.458,pmincalt:0.023,pmintbaj:0.022,pmintmed:0.435,pmintalt:0.543,pctbaj:0.265,pctmed:0.578,pctalt:0.157,pcmaxbaj:0.022,pcmaxmed:0.458,pcmaxalt:0.520,ptmaxbaj:0.542,ptmaxmed:0.437,ptmaxcalt:0.022,ptantbaj:0.46,ptantsub:0.54,ptnochebaj:0.528,ptnochesub:0.472
           }},
+      //Bien
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.5393,pmincbaj:0.547,pmincmed:0.434,pmincalt:0.019,pmintbaj:0.034,pmintmed:0.458,pmintalt:0.508,pctbaj:0.282,pctmed:0.568,pctalt:0.150,pcmaxbaj:0.019,pcmaxmed:0.434,pcmaxalt:0.547,ptmaxbaj:0.507,ptmaxmed:0.459,ptmaxcalt:0.034,ptantbaj:0.457,ptantsub:0.543,ptnochebaj:0.545,ptnochesub:0.455
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.4606,pmincbaj:0.574,pmincmed:0.406,pmincalt:0.020,pmintbaj:0.031,pmintmed:0.480,pmintalt:0.489,pctbaj:0.276,pctmed:0.565,pctalt:0.159,pcmaxbaj:0.020,pcmaxmed:0.405,pcmaxalt:0.575,ptmaxbaj:0.489,ptmaxmed:0.481,ptmaxcalt:0.031,ptantbaj:0.464,ptantsub:0.536,ptnochebaj:0.576,ptnochesub:0.424
           }},
+      //Pocos Datos
     {subida: {
-                psub:0.50266,pmincbaj:0.539,pmincmed:0.433,pmincalt:0.28,pmintbaj:0.029,pmintmed:0.455,pmintalt:0.516,pctbaj:0.286,pctmed:0.564,pctalt:0.150,pcmaxbaj:0.027,pcmaxmed:0.431,pcmaxalt:0.541,ptmaxbaj:0.513,ptmaxmed:0.458,ptmaxcalt:0.029,ptantbaj:0.493,ptantsub:0.507,ptnochebaj:0.516,ptnochesub:0.484
+                psub:0.5,pmincbaj:0.554,pmincmed:0.431,pmincalt:0.012,pmintbaj:0.018,pmintmed:0.412,pmintalt:0.566,pctbaj:0.228,pctmed:0.594,pctalt:0.175,pcmaxbaj:0.012,pcmaxmed:0.431,pcmaxalt:0.554,ptmaxbaj:0.566,ptmaxmed:0.412,ptmaxcalt:0.018,ptantbaj:0.474,ptantsub:0.523,ptnochebaj:0.397,ptnochesub:0.6
             },
      bajada: {
-                pbaj:0.49733,pmincbaj:0.506,pmincmed:0.470,pmincalt:0.023,pmintbaj:0.023,pmintmed:0.458,pmintalt:0.518,pctbaj:0.274,pctmed:0.591,pctalt:0.135,pcmaxbaj:0.023,pcmaxmed:0.469,pcmaxalt:0.508,ptmaxbaj:0.516,ptmaxmed:0.461,ptmaxcalt:0.023,ptantbaj:0.5,ptantsub:0.5,ptnochebaj:0.5,ptnochesub:0.5
+                pbaj:0.5,pmincbaj:0.566,pmincmed:0.415,pmincalt:0.018,pmintbaj:0.018,pmintmed:0.412,pmintalt:0.569,pctbaj:0.203,pctmed:0.597,pctalt:0.2,pcmaxbaj:0.018,pcmaxmed:0.403,pcmaxalt:0.578,ptmaxbaj:0.569,ptmaxmed:0.412,ptmaxcalt:0.018,ptantbaj:0.523,ptantsub:0.477,ptnochebaj:0.422,ptnochesub:0.578
           }},
     //Bien
     {subida: {
